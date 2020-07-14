@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:fragment="headerfiles">
+    <title>AS</title>
+    <meta charset="UTF-8"/>
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+<body>
+
+<!-- Navigacija linkovi -->
+<div th:fragment="nav">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">AS</a>
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" th:href="@{~/pocetna}"><i class="fa fa-home"></i>Početna</a>
+                    </li>
+                    <!-- ADMIN -->
+                    <li sec:authorize="hasAuthority('ADMIN')" class="nav-item">
+                        <a class="nav-link" href="#" th:href="@{~/administriranjeClanova/korisnici}"><i class="fa fa-home"></i>Pregled korisnika</a>
+                    </li>
+                    <li sec:authorize="hasAuthority('ADMIN')" class="nav-item">
+                        <a  class="nav-link" href="#" th:href="@{~/pregledBioskopaAdmin}"><i class="fa fa-home"></i>Pregled bioskopa</a>
+                    </li>
+                    <li sec:authorize="hasAuthority('ADMIN')" class="nav-item">
+                        <a  class="nav-link" href="#" th:href="@{~/pregledFilmovaAdmin}"><i class="fa fa-home"></i>Pregled filmova</a>
+                    </li>
+                    <li sec:authorize="hasAuthority('ADMIN')" class="nav-item">
+                        <a class="nav-link" href="#" th:href="@{~/novaProjekcija}"><i class="fa fa-home"></i>Dodavanje projekcije</a>
+                    </li>
+
+                   <!-- KORISNIK -->
+                    <li sec:authorize="hasAuthority('KORISNIK')" class="nav-item">
+                        <a class="nav-link" href="#" th:href="@{~/pregledFilmova}"><i class="fa fa-home"></i>Pregled filmova</a>
+                    </li>
+                    <li sec:authorize="hasAuthority('KORISNIK')" class="nav-item">
+                        <a class="nav-link" href="#" th:href="@{~/mojeRezervacije}"><i class="fa fa-home"></i>Moje rezervacije</a>
+                    </li>
+                    <li sec:authorize="hasAuthority('KORISNIK')" class="nav-item">
+                        <a class="nav-link" href="#" th:href="@{~/korisnickiProfil}"><i class="fa fa-home"></i>Moj profil</a>
+                    </li>
+                    <!-- SVI -->
+                    <li sec:authorize="isAnonymous()" class="nav-item">
+                        <a class="nav-link" href="#" th:href="@{~/pregledBioskopa}"><i class="fa fa-home"></i>Naši bioskopi</a>
+                    </li>
+                    <li sec:authorize="isAnonymous()" class="nav-item">
+                        <a class="nav-link" href="#" th:href="@{~/pregledFilmova}"><i class="fa fa-home"></i>Pregled filmova</a>
+                    </li>
+                </ul>
+
+                <div sec:authorize="isAnonymous()" style="float:right;display:inline-flex;flex-direction:row;">
+                    <a th:href="@{/registracija}" class="btn btn-outline-danger my-2 my-sm-0 btn-sm">Registracija</a>
+                    <a th:href="@{/login}" class="btn btn-outline-info my-2 my-sm-0 btn-sm">Login</a>
+                </div>
+                <div sec:authorize="isAuthenticated()" >
+              <span th:text="${#authentication.name}" class="navbar-text" style="color: white"></span>
+                  <a th:href="@{/logout}" class="btn btn-outline-info my-2 my-sm-0 btn-sm">Logout</a>
+                </div>
+            </div>
+    </nav>
+</div>
+</body>
+</html>

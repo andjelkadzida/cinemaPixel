@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head th:insert="navigacija.html :: headerfiles">
+    <meta charset="UTF-8">
+    <title>Korisnički profil</title>
+</head>
+<body style="font-size: 120%; background: #E5F0FF; font-family: 'Open Sans', sans-serif;">
+<header th:insert="navigacija.html :: nav"></header><pre style="margin-bottom: 3px"></pre>
+<div align="center" class="text-white bg-dark">
+    <h2 style="text-align: center" class="text-white bg-dark">Vaš profil</h2>
+    <table class="table table-dark">
+        <thead>
+        <th style="text-align: center">Ime</th>
+        <th style="text-align: center"th:text="${korisnik.getIme()}"></th>
+        </thead>
+        <thead>
+        <th style="text-align: center">Prezime</th>
+        <th style="text-align: center" th:text="${korisnik.getPrezime()}"></td>
+        </thead>
+        <thead>
+        <th style="text-align: center">Email</th>
+        <th style="text-align: center" th:text="${korisnik.getEmail()}"></td>
+        </thead>
+        <thead>
+        <th style="text-align: center">Poeni</th>
+        <th style="text-align: center" th:text="${korisnik.getPoeni()}"></td>
+        </thead>
+        <thead>
+        <th style="text-align: center">Član kluba</th>
+        <div th:if="${korisnik.getClanKluba()==true}">
+            <th style="text-align: center">Član ste VIP kluba bioskopa!</td>
+        </div>
+        <div th:unless="${korisnik.getClanKluba()==true}">
+            <th style="text-align: center">Niste član VIP kluba bioskopa!</td>
+        </div>
+        </thead>
+    </table>
+    <a href="#" th:href="@{/korisnickiProfil/update}" class="btn" style="margin-right: 90px; color: white; background: #4c60af; border: none; border-radius: 5px;font-family: 'Open Sans', sans-serif;">Izmenite podatke</a>
+    <form action="#" th:action="@{/korisnickiProfil/delete}" th:object="${korisnik}" method="post">
+        <input type="submit" class="btn btn-danger" value="Obrišite profil" style="margin-top: -70px; margin-left: 250px; border: none; color:white; border-radius: 5px;font-family: 'Open Sans', sans-serif;">
+    </form>
+</div>
+</body>
+<footer th:insert="footer"></footer>
+</html>

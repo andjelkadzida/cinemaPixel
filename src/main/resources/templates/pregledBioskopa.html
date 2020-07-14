@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head th:insert="navigacija.html :: headerfiles">
+    <meta charset="UTF-8">
+    <title>Pregled filmova</title>
+</head>
+<body style="background-color: #E5F0FF;">
+<header th:insert="navigacija.html :: nav"></header>
+<div>
+    <form th:action="@{/pregledBioskopa}" th:object="${bioskop}" method="post" th:align="center">
+        <table class="table table-bordered;" style="border: 1px solid white!important;">
+            <thead style="border: 1px solid white!important;">
+            <tr style="border: 1px solid white!important;">
+                <th style="border: 1px solid white!important;">Naziv</th>
+                <th style="border: 1px solid white!important;">Grad</th>
+                <th style="border: 1px solid white!important;">Adresa</th>
+            </tr>
+            </thead>
+            <tbody style="border: 1px solid white!important;">
+            <tr th:each="bioskop : ${bioskop}" style="border: 1px solid white!important;">
+                <td th:text="${bioskop.naziv}" style="border: 1px solid white!important; text-align: center; vertical-align: middle;"></td>
+                <td th:text="${bioskop.grad}" style="border: 1px solid white!important; text-align: center; vertical-align: middle;"></td>
+                <td th:text="${bioskop.adresa}" style="border: 1px solid white!important; text-align: center; vertical-align: middle;"></td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+</body>
+<footer th:insert="footer"></footer>
+</html>

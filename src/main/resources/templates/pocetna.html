@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head th:insert="navigacija.html :: headerfiles">
+    <meta charset="UTF-8">
+    <title>Početna</title>
+</head>
+<body style="background-color: #343a40;">
+<header th:insert="navigacija.html :: nav"></header>
+<!-- carousel -->
+<div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+    </ol>
+    <div class="carousel-inner">
+        <div class="carousel-item active" style="height: 1185px">
+            <img  class="d-block w-100" src="../static/images/movieTime.jpg" alt="..." th:src="@{images/movieTime.jpg}">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Uživajte u omiljenom filmu uz bioskop AS!</h5>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- kraj carousel -->
+<div style="background-color: #343a40; text-align: center;">
+    <h4 style="background-color: #343a40; color: white; text-align: center">Bioskop AS je predstavlja lanac inovativnih bioskopa!</h4>
+    <h4 style="background-color: #343a40; color: white; text-align: center">Našim najvernijim posetiocima smo obezbedili specijalne klubove i popuste pri kupovini karata.</h4>
+    <h4 style="background-color: #343a40; color: white; text-align: center">Svakog člana kluba očekuje mogućnost rezervacije specijalnih sedišta!</h4>
+    <h4 style="background-color: #343a40; color: white; text-align: center">Obezbedite svoje mesto na vreme!</h4>
+    <h4 style="background-color: #343a40; color: white; text-align: center">Želimo vam prijatan boravak!</h4>
+    <h4 style="background-color: #343a40; color: white; text-align: center">Vaš bioskop <b>AS</b></h4><pre></pre>
+    <footer th:insert="footer"></footer>
+</div>
+</body>
+<footer th:insert="footer"></footer>
+</html>
