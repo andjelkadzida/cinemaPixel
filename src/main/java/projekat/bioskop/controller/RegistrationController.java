@@ -44,8 +44,8 @@ public class RegistrationController
         else
         {
             korisnikService.sacuvajKorisnika(korisnik);
-            //modelAndView.addObject("poruka", "Registrovali ste se");
             modelAndView.setViewName("login");
+            return modelAndView;
         }
         modelAndView.addObject("korisnik", new Korisnik());
         modelAndView.setViewName("registracija");
