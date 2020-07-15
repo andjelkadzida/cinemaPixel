@@ -37,6 +37,9 @@
 
                    <!-- KORISNIK -->
                     <li sec:authorize="hasAuthority('KORISNIK')" class="nav-item">
+                        <a class="nav-link" href="#" th:href="@{~/pregledBioskopa}"><i class="fa fa-home"></i>Naši bioskopi</a>
+                    </li>
+                    <li sec:authorize="hasAuthority('KORISNIK')" class="nav-item">
                         <a class="nav-link" href="#" th:href="@{~/pregledFilmova}"><i class="fa fa-home"></i>Pregled filmova</a>
                     </li>
                     <li sec:authorize="hasAuthority('KORISNIK')" class="nav-item">
