@@ -133,4 +133,5 @@ public class RezervacijaController
         rezervacijaRepository.save(rezervacija);
         return "redirect:/mojeRezervacije";
     }
+
 }

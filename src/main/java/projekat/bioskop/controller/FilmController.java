@@ -11,7 +11,6 @@ import projekat.bioskop.model.*;
 import projekat.bioskop.repository.*;
 import projekat.bioskop.services.FilmService;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
