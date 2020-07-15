@@ -43,7 +43,7 @@
         </table>
         <h2 style="text-align: center" class="text-white bg-dark">Statistika</h2>
         <table class="table table-bordered table-dark" style="table-layout:auto;">
-         <thead  style="text-align: center"  style="text-align: center">
+         <thead style="text-align: center">
          <tr  style="text-align: center">
              <th  style="text-align: center">Broj potvrđenih rezervacija</th>
              <th  style="text-align: center">Broj otkazanih rezervacija</th>
@@ -60,17 +60,17 @@
         </table>
         <h2 style="text-align: center" class="text-white bg-dark">Pregled zarade na dan</h2><h2 th:text="${#temporals.format(datum, 'dd-MM-yyyy')}"></h2>
         <table class="table table-bordered" style="table-layout:auto;">
-            <thead  style="text-align: center"  style="text-align: center">
+            <thead  style="text-align: center">
             <tr  style="text-align: center">
-                <th  style="text-align: center">Ukupna zarada</th>
+                <th  style="text-align: center; color: white;font-size: 20px;">Ukupna zarada</th>
             </tr>
             </thead>
             <tbody>
             <div th:if="${zarada==0}">
-                <td  style="text-align: center">Nema zarade!</td>
+                <td  style="text-align: center; color: white; font-size: 20px;">Nema zarade!</td>
             </div>
             <div th:unless="${zarada==0}">
-                <td  style="text-align: center" th:text="${zarada}"></td>
+                <td  style="text-align: center; color: white;font-size: 20px;" th:text="${zarada + ' RSD'}"></td>
             </div>
             </tbody>
         </table>

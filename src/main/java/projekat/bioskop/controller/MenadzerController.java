@@ -21,7 +21,7 @@ public class MenadzerController
     @Autowired
     RezervisanaSedistaRepository rezervisanaSedistaRepository;
 
-    @RequestMapping("/izvestajRezervacija")
+    @RequestMapping(value = "/izvestajRezervacija")
     public String listaSvihRezervacija(Model model)
     {
         LocalDateTime datum = LocalDateTime.now();

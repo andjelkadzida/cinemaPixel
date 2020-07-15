@@ -55,14 +55,28 @@ public class RezervacijaController
                             {
                                 if(rs.getSediste().getTipSedista().equals("Specijalno"))
                                 {
-                                    int poeni = k.getPoeni()-40;
-                                    k.setPoeni(poeni);
+                                    if(k.getPoeni()>0)
+                                    {
+                                        int poeni = k.getPoeni() - 40;
+                                        k.setPoeni(poeni);
+                                    }
+                                    else
+                                    {
+                                        k.setPoeni(0);
+                                    }
                                     korisnikRepository.save(k);
                                 }
                                 else
                                 {
-                                    int poeni = k.getPoeni()-20;
-                                    k.setPoeni(poeni);
+                                    if(k.getPoeni()>0)
+                                    {
+                                        int poeni = k.getPoeni() - 20;
+                                        k.setPoeni(poeni);
+                                    }
+                                    else
+                                    {
+                                        k.setPoeni(0);
+                                    }
                                     korisnikRepository.save(k);
                                 }
                                 nov.add(s);
@@ -101,14 +115,28 @@ public class RezervacijaController
                     xy.add(s);
                     if(s.getTipSedista().equals("Specijalno"))
                     {
-                        int poeni = k.getPoeni() - 40;
-                        k.setPoeni(poeni);
+                        if(k.getPoeni()>0)
+                        {
+                            int poeni = k.getPoeni() - 40;
+                            k.setPoeni(poeni);
+                        }
+                        else
+                        {
+                            k.setPoeni(0);
+                        }
                         korisnikRepository.save(k);
                     }
                     else
                     {
-                        int poeni = k.getPoeni() - 20;
-                        k.setPoeni(poeni);
+                        if(k.getPoeni()>0)
+                        {
+                            int poeni = k.getPoeni() - 20;
+                            k.setPoeni(poeni);
+                        }
+                        else
+                        {
+                            k.setPoeni(0);
+                        }
                         korisnikRepository.save(k);
                     }
                 }
