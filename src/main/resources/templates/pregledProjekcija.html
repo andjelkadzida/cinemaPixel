@@ -28,12 +28,17 @@
                     <td  style="border: 1px solid white!important; text-align: center; vertical-align: middle;" th:text="${#temporals.format(projekcija.getPocetakProjekcije().toLocalTime(), 'HH:mm') + 'h'}"></td>
                     <td  style="border: 1px solid white!important; text-align: center; vertical-align: middle;" th:text="${#temporals.format(projekcija.getKrajProjekcije().toLocalTime(), 'HH:mm') + 'h'}"></td>
                     <td  style="border: 1px solid white!important; text-align: center; vertical-align: middle;" th:text="${projekcija.getSala().getBrojSale()}"></td>
-                    <td  style="border: 1px solid white!important; text-align: center; vertical-align: middle;">
-                        <form th:action="@{/izborSedista}" method="post">
-                            <input type="hidden" th:value="${projekcija.getProjekcijaId()}" name="projekcijaId">
-                            <input type="submit" value="Izbor sedista" class="btn btn-primary">
-                        </form>
-                    </td>
+                    <div th:if="${danas.isAfter(projekcija.getPocetakProjekcije())}">
+                        <td>Nije moguće izvršiti rezervaciju za projekciju koja je u toku ili je završena!</td>
+                    </div>
+                    <div th:unless="${danas.isAfter(projekcija.getPocetakProjekcije())}">
+                        <td  style="border: 1px solid white!important; text-align: center; vertical-align: middle;">
+                            <form th:action="@{/izborSedista}" method="post">
+                                <input type="hidden" th:value="${projekcija.getProjekcijaId()}" name="projekcijaId">
+                                <input type="submit" value="Izbor sedista" class="btn btn-primary">
+                            </form>
+                        </td>
+                    </div>
                 </tr>
                 </tbody>
             </table>

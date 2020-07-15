@@ -11,6 +11,8 @@ import projekat.bioskop.model.*;
 import projekat.bioskop.repository.*;
 import projekat.bioskop.services.FilmService;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -42,6 +44,8 @@ public class FilmController
     {
         Set<Projekcija> projekcija = projekcijaRepository.projekcijaPoFilmu(izabranFilm);
         model.addAttribute("projekcija", projekcija);
+        LocalDateTime danas = LocalDateTime.now();
+        model.addAttribute("danas", danas);
         return "pregledProjekcija";
     }
     @RequestMapping(value = "/izborSedista", method = RequestMethod.POST)
