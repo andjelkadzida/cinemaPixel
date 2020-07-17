@@ -42,10 +42,10 @@
                     <a style="position: center" class="btn btn-primary" th:href="@{/dodavanjeFilmova}">Dodaj</a>
                 </td>
                 <td style="border: 1px solid white!important; text-align: center; vertical-align: middle;">
-                    <a style="position: center" class="btn btn-primary" th:href="@{/izmenaFilmova/{id}(id=${film.getFilmId()})}">Izmeni</a>
+                    <a style="position: center" class="btn btn-primary" th:href="@{/izmenaFilmova/{film_id}(film_id=${film.getFilmId()})}">Izmeni</a>
                 </td>
                 <td style="border: 1px solid white!important; text-align: center; vertical-align: middle;">
-                    <a style="position: center" class="btn btn-danger" th:href="@{/brisanjeFilmova/{id}(id=${film.getFilmId()})}">Obriši</a>
+                    <a style="position: center" class="btn btn-danger" th:href="@{/brisanjeFilmova/{film_id}(film_id=${film.getFilmId()})}">Obriši</a>
                 </td>
             </tr>
             </tbody>

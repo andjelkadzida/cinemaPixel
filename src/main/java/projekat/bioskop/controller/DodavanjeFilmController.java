@@ -64,17 +64,17 @@ public class DodavanjeFilmController
         modelAndView.setViewName("noviFilm");
         return modelAndView;
     }
-    @RequestMapping(value = "/izmenaFilmova/{id}", method = RequestMethod.GET)
-    public String izmenaFilmovaView(Model model, @PathVariable("id") Long filmId)
+    @RequestMapping(value = "/izmenaFilmova/{film_id}", method = RequestMethod.GET)
+    public String izmenaFilmovaView(Model model, @PathVariable("film_id") Long film_id)
     {
-        Film film = filmRepository.getOne(filmId);
+        Film film = filmRepository.getOne(film_id);
         model.addAttribute("film", film);
         return "izmenaFilmova";
     }
-    @RequestMapping(value = "/izmenaFilmova/{id}", method = RequestMethod.POST)
-    public String izmenaFilmova(Model model, @PathVariable("id") Long filmId, @Valid Film film)
+    @RequestMapping(value = "/izmenaFilmova/{film_id}", method = RequestMethod.POST)
+    public String izmenaFilmova(Model model, @PathVariable("film_id") Long film_id, @Valid Film film)
     {
-        film.setFilmId(filmId);
+        film.setFilmId(film_id);
         Film f = filmRepository.nadjiPoNazivuFilma(film.getNazivFilma());
         Film f1 = filmRepository.nadjiPoNazivuFilmaId(film.getNazivFilma(), film.getFilmId());
         String msg;
@@ -96,23 +96,23 @@ public class DodavanjeFilmController
             return "redirect:/pregledFilmovaAdmin";
         }
     }
-    @GetMapping(value = "/brisanjeFilmova/{id}")
-    public String brisanjeFilmova(@PathVariable("id") Long filmId)
+    @GetMapping(value = "/brisanjeFilmova/{film_id}")
+    public String brisanjeFilmova(@PathVariable("film_id") Long film_id)
     {
-        Film f = filmRepository.getOne(filmId);
-        Set<Projekcija> projekcije = projekcijaRepository.nadjiPoIdFilma(filmId);
+        Film f = filmRepository.getOne(film_id);
+        Set<Projekcija> projekcije = projekcijaRepository.nadjiPoIdFilma(film_id);
         List<Rezervacija> rezervacije = rezervacijaRepository.findAll();
         List<RezervisanaSedista> rezervisanaSedistas = rezervisanaSedistaRepository.findAll();
         for(Rezervacija r: rezervacije)
         {
             for(RezervisanaSedista rs : rezervisanaSedistas)
             {
-                if(rs.getRezervacija().getProjekcija().getFilm().getFilmId()==filmId)
+                if(rs.getRezervacija().getProjekcija().getFilm().getFilmId()==film_id)
                 {
                     rezervisanaSedistaRepository.delete(rs);
                 }
             }
-            if(r.getProjekcija().getFilm().getFilmId()==filmId)
+            if(r.getProjekcija().getFilm().getFilmId()==film_id)
             {
                 rezervacijaRepository.delete(r);
             }

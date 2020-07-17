@@ -12,6 +12,7 @@ import projekat.bioskop.repository.ProjekcijaRepository;
 import projekat.bioskop.repository.RezervacijaRepository;
 import projekat.bioskop.repository.RezervisanaSedistaRepository;
 
+import javax.transaction.Transactional;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -30,6 +31,7 @@ public class RezervacijaController
     ProjekcijaRepository projekcijaRepository;
 
     @Scheduled(fixedRate = 1800000)
+    @Transactional
     public void automatskoOtkazivanjeRezervacije()
     {
         Set<Projekcija>projekcije = projekcijaRepository.sveProjekcije();
@@ -39,7 +41,7 @@ public class RezervacijaController
         for(Rezervacija r:rezervacije)
         {
             Set<RezervisanaSedista> rezervisanaSedistas = rezervacijaRepository.nadjiPoIdRezervacijeSet(r.getRezervacijaId());
-            Projekcija p = projekcijaRepository.nadjiPoId(r.getProjekcija().getProjekcijaId(), r.getRezervacijaId());
+            Projekcija p = projekcijaRepository.getOne(r.getProjekcija().getProjekcijaId());
             Set<Sediste> sedisteSet = p.getRasporedSedista();
             Set<Sediste> nov = new HashSet<>();
             long minutes = Duration.between(trenutno, r.getProjekcija().getPocetakProjekcije()).toMinutes();
@@ -101,7 +103,7 @@ public class RezervacijaController
         Set<RezervisanaSedista> rs = rezervacijaRepository.nadjiPoIdRezervacijeSet(rezervacija_id);
         Rezervacija rezervacija = rezervacijaRepository.findByRezervacijaId(rezervacija_id);
         Long idProjekcije = rezervacija.getProjekcija().getProjekcijaId();
-        Projekcija p = projekcijaRepository.nadjiPoId(idProjekcije, rezervacija_id);
+        Projekcija p = projekcijaRepository.getOne(idProjekcije);
         Set<RezervisanaSedista> rezervisanaSedista = rezervacija.getRezervisanaSedista();
         Set<Sediste> sedista = p.getRasporedSedista();
         Set<Sediste> xy = new HashSet<>();

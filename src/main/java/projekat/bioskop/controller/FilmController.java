@@ -1,5 +1,8 @@
 package projekat.bioskop.controller;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailException;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +15,7 @@ import projekat.bioskop.repository.*;
 import projekat.bioskop.services.FilmService;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -31,6 +35,13 @@ public class FilmController
     SedisteRepository sedisteRepository;
     @Autowired
     RezervisanaSedistaRepository rezervisanaSedistaRepository;
+
+    JavaMailSender javaMailSender;
+    @Autowired
+    public FilmController(JavaMailSender javaMailSender)
+    {
+        this.javaMailSender=javaMailSender;
+    }
     @RequestMapping("/pregledFilmova")
     public String spisakFilmova(Model model)
     {
@@ -86,24 +97,39 @@ public class FilmController
         rezervacijaRepository.save(rezervacija);
         for(RezervisanaSedista rezervisanaSedista : rezervisano)
         {
+            //Dodavanje poena korisniku prema tome da li je rezervisano specijalno sediste i setovanje cene karte prema sedistima
+            if(rezervisanaSedista.getSediste().getTipSedista().equals("Specijalno"))
+            {
+                int poeni = 40;
+                int noviP = k.getPoeni() + poeni;
+                k.setPoeni(noviP);
+                rezervisanaSedista.setCenaKarte(1000);
+                korisnikRepository.save(k);
+            }
+            else
+            {
+                int poeni = 20;
+                int noviP = k.getPoeni() + poeni;
+                k.setPoeni(noviP);
+                rezervisanaSedista.setCenaKarte(500);
+                korisnikRepository.save(k);
+            }
             rezervisanaSedistaRepository.save(rezervisanaSedista);
-        }
-        //Dodavanje poena korisniku prema tome da li je clan kluba
-        if(k.getClanKluba()==true)
-        {
-            int poeni = 40;
-            int noviP = k.getPoeni() + poeni;
-            k.setPoeni(noviP);
-            rezervacija.setCenaKarte(1000);
-            korisnikRepository.save(k);
-        }
-        else
-        {
-            int poeni = 20;
-            int noviP = k.getPoeni() + poeni;
-            k.setPoeni(noviP);
-            rezervacija.setCenaKarte(500);
-            korisnikRepository.save(k);
+            try
+            {
+                //slanje maila
+                String mailKorisnika = k.getEmail();
+                SimpleMailMessage mail = new SimpleMailMessage();
+                mail.setTo(mailKorisnika);
+                mail.setSubject("Nova rezervacija");
+                mail.setText("Zdravo " + k.getIme() + "!" + "\n" + "U naš bioskop je pristigla tvoja rezervacija!" + "\n"  +  "Podaci o bioskopu: " + "\n" +
+                "Naziv bioskopa: " +  p.getSala().getBioskop().getNaziv() + ", adresa: " + p.getSala().getBioskop().getAdresa() + ", grad: " + p.getSala().getBioskop().getGrad() + "\n" + "Podaci o filmu:" + "\n" + "Naziv filma: " + p.getFilm().getNazivFilma() + ", zanr: " + p.getFilm().getZanr() + ", tehnologija: " +  p.getFilm().getTehnologija() + ", trajanje: " + p.getFilm().getTrajanje() + " minuta" + "\n" + "Podaci o projekciji: " + "\n" + "Datum projekcije: " + p.getPocetakProjekcije().toLocalDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + ", početak projekcije: " + p.getPocetakProjekcije().toLocalTime() + "h" + ", kraj projekcije " +p.getKrajProjekcije().toLocalTime() + "h" + "\n" + "Broj sale: " + p.getSala().getBrojSale() + "\n" + "Sedišta: " + rezervisanaSedista.getSediste().getSedisteId() + "\n" + "Cena karte: " + rezervisanaSedista.getCenaKarte() + " RSD");
+                javaMailSender.send(mail);
+            }
+            catch (MailException exception)
+            {
+
+            }
         }
         return  "redirect:/mojeRezervacije";
     }

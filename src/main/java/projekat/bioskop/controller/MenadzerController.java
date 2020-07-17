@@ -33,6 +33,11 @@ public class MenadzerController
         List<RezervisanaSedista> rezervisanaSedistaSet = rezervisanaSedistaRepository.findAll();
         for(RezervisanaSedista rs: rezervisanaSedistaSet)
         {
+            zarada+=rs.getCenaKarte();
+            if(rs.getRezervacija().getPotvrdjena()==false)
+            {
+                zarada-=rs.getCenaKarte();
+            }
             rs.getRezervacija().getProjekcija().getSala().getBioskop().getGrad();
             rs.getRezervacija().getProjekcija().getFilm().getNazivFilma();
             rs.getRezervacija().getProjekcija().getFilm().getZanr();
@@ -45,7 +50,6 @@ public class MenadzerController
         }
         for(Rezervacija r: rezervacijas)
         {
-            zarada+=r.getCenaKarte();
             if(r.getPotvrdjena()==null)
             {
                 bezStatusa++;
@@ -56,7 +60,6 @@ public class MenadzerController
             }
             else
             {
-                zarada-=r.getCenaKarte();
                 otkazane++;
             }
             r.getProjekcija().getSala().getBioskop().getGrad();

@@ -14,8 +14,6 @@ public class Rezervacija
     @Column(name = "potvrdjena", unique = false, nullable = true)
     private Boolean potvrdjena;
 
-    @Column(name = "cenaKarte", unique = false)
-    private double cenaKarte;
 
     @ManyToOne
     @JoinColumn(name = "korisnik_id", nullable = false)
@@ -48,16 +46,6 @@ public class Rezervacija
     public void setPotvrdjena(Boolean potvrdjena)
     {
         this.potvrdjena = potvrdjena;
-    }
-
-    public double getCenaKarte()
-    {
-        return cenaKarte;
-    }
-
-    public void setCenaKarte(double cenaKarte)
-    {
-        this.cenaKarte = cenaKarte;
     }
 
     public Korisnik getKorisnik()

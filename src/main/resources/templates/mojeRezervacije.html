@@ -39,7 +39,7 @@
                 <td  style="text-align: center" th:text="${#temporals.format(rezervisanoSediste.getRezervacija().getProjekcija().getKrajProjekcije().toLocalTime(), 'HH:mm') + 'h'}"></td>
                 <td  style="text-align: center" th:text="${rezervisanoSediste.getRezervacija().getProjekcija().getSala().getBrojSale()}"></td>
                 <td  style="text-align: center" th:text="${rezervisanoSediste.getSediste().getSedisteId()}"></td>
-                <td  style="text-align: center" th:text="${rezervisanoSediste.getRezervacija().getCenaKarte()}"></td>
+                <td  style="text-align: center" th:text="${rezervisanoSediste.getCenaKarte()}"></td>
                 <div th:if="${rezervisanoSediste.getRezervacija().getPotvrdjena()==true}">
                     <td  style="text-align: center">Rezervacija je potvrđena!</td>
                 </div>

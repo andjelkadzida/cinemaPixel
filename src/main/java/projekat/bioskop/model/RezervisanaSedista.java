@@ -11,6 +11,8 @@ public class RezervisanaSedista
     @Column(name = "rezevisanaSedista_id", unique = true)
     private Long rezevisanaSedista_id;
 
+    @Column(name = "cenaKarte", unique = false)
+    private double cenaKarte;
 
     @ManyToOne
     @JoinColumn(name = "rezervacija_id", nullable = false)
@@ -49,6 +51,16 @@ public class RezervisanaSedista
     public void setSediste(Sediste sediste)
     {
         this.sediste = sediste;
+    }
+
+    public double getCenaKarte()
+    {
+        return cenaKarte;
+    }
+
+    public void setCenaKarte(double cenaKarte)
+    {
+        this.cenaKarte = cenaKarte;
     }
 
     public RezervisanaSedista()

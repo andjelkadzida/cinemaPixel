@@ -13,7 +13,7 @@
 border-radius: 10px 10px 0px 0px; padding: 20px; font-family: 'Open Sans', sans-serif;">
         <h2>Izmena filmova</h2>
     </div>
-    <form autocomplete="off" th:action="@{/izmenaFilmova/{id}(id=${film.getFilmId()})}" th:object="${film}" method="post" align="center"
+    <form autocomplete="off" th:action="@{/izmenaFilmova/{film_id}(film_id=${film.getFilmId()})}" th:object="${film}" method="post" align="center"
           style="width: 30%; margin: 0px auto; padding: 20px; border: 1px solid #B0C4DE; background: white; border-radius: 0px 0px 10px 10px;">
         <div class="input-group" style="margin: 10px 0px 10px 0px; font-family: 'Open Sans', sans-serif;" >
             <label style="display: block; text-align: left; margin: 3px;">Naziv bioskopa</label><br>
