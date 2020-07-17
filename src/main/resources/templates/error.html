@@ -5,12 +5,11 @@
     <meta charset="UTF-8">
     <title>Greška</title>
 </head>
-<!-- <body style="background-image: url('er.png'); background-repeat: no-repeat;background-size: cover;"> -->
 <body th:style="'background:url('+ @{/images/er.png} +') no-repeat center center fixed;'">
 <header th:insert="navigacija.html :: nav"></header>
 <div style="width:50%; margin:auto; align-content: center;">
     <h1 align="center">Došlo je do greške!</h1>
-    <h2 align="center">Molimo vas da kontaktirate <a href="mailto:andjelkadzida@gmail.com?subject=Prijava%20greške%20na%20sajtu">administratora</a> sajta.</h2>
+    <h2 align="center">Molimo vas da kontaktirate <a href="mailto:as.bioskop@gmail.com?subject=Prijava%20greške%20na%20sajtu">administratora</a> sajta.</h2>
     <a class="btn" style="margin-top: 525px; margin-left: 140px; background-color: rgb(246,187,67)"th:align="center" th:href="@{/pocetna}">Povratak na početnu stranicu</a>
 </div>
 </body>
