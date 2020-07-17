@@ -5,12 +5,12 @@
     <title>Logovanje</title>
 </head>
 <div style="margin: 0px;padding: 0px;">
-<body style="font-size: 120%; background: #E5F0FF; font-family: 'Open Sans', sans-serif;">
+<body style="background: #E5F0FF; ">
 <header th:insert="navigacija.html :: nav"></header>
-<div class="header" style="width: 30%; margin: 50px auto 0px; color: white; background: #4c60af; text-align: center; border: 1px solid #B0C4DE; border-bottom: none; border-radius: 10px 10px 0px 0px; padding: 20px;">
+<div class="header" style="width: 30%;font-family: 'Open Sans', sans-serif;font-size: 120%; margin: 50px auto 0px; color: white; background: #4c60af; text-align: center; border: 1px solid #B0C4DE; border-bottom: none; border-radius: 10px 10px 0px 0px; padding: 20px;">
     <h2>Ulogujte se</h2>
 </div>
-<form name="form"  action="#" th:action="@{/login}" method="post" align="center" style="width: 30%;margin: 0px auto;padding: 20px;border: 1px solid #B0C4DE;background: white; border-radius: 0px 0px 10px 10px;">
+<form name="form"  action="#" th:action="@{/login}" method="post" align="center" style="width: 30%;margin: 0px auto;padding: 20px;border: 1px solid #B0C4DE;background: white; border-radius: 0px 0px 10px 10px; font-family: 'Open Sans', sans-serif;font-size: 120%;">
     <div class="input-group" style="margin: 10px 0px 10px 0px;">
         <label for="email" style=" display: block; text-align: left;margin: 3px;">Email</label><br>
         <input type="text" id="email" name="username" style="height: 30px; width: 100%; padding: 5px 10px; font-size: 16px;border-radius: 5px; border: 1px solid gray;"><br>

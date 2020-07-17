@@ -5,10 +5,10 @@
     <title>Izmena podataka korisnika</title>
 </head>
 <div style="margin: 0px; padding: 0px;">
-<body style="font-size: 120%; background-color: #E5F0FF; font-family: 'Open Sans', sans-serif;" >
+<body style="background-color: #E5F0FF;" >
 <header th:insert="navigacija.html :: nav"></header>
 <div class="header" style="width: 30%; margin: 50px auto 0px;  color: white; background: #4c60af; text-align: center;  border: 1px solid #B0C4DE; border-bottom: none;
-border-radius: 10px 10px 0px 0px; padding: 20px; font-family: 'Open Sans', sans-serif;">
+border-radius: 10px 10px 0px 0px; padding: 20px;font-family: 'Open Sans', sans-serif;font-size: 120%;">
     <h2>Izmena podataka korisnika</h2>
 </div>
 <form action="#" th:action="@{/korisnici/update/{korisnik_id}(korisnik_id=${korisnik.getKorisnikId()})}" th:object="${korisnik}" method="post" align="center"
