@@ -117,7 +117,7 @@ public class FilmController
             rezervisanaSedistaRepository.save(rezervisanaSedista);
             try
             {
-                //slanje maila
+                //Slanje rezervacije na mail
                 String mailKorisnika = k.getEmail();
                 SimpleMailMessage mail = new SimpleMailMessage();
                 mail.setTo(mailKorisnika);
