@@ -7,12 +7,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import projekat.bioskop.model.Korisnik;
+import projekat.bioskop.model.*;
 import projekat.bioskop.repository.KorisnikRepository;
+import projekat.bioskop.repository.ProjekcijaRepository;
+import projekat.bioskop.repository.RezervacijaRepository;
+import projekat.bioskop.repository.RezervisanaSedistaRepository;
 import projekat.bioskop.services.KorisnikService;
 
 import javax.validation.Valid;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 public class AdministracijaClanovaController
@@ -20,7 +25,12 @@ public class AdministracijaClanovaController
     private KorisnikRepository korisnikRepository;
     @Autowired
     private KorisnikService korisnikService;
-
+    @Autowired
+    private ProjekcijaRepository projekcijaRepository;
+    @Autowired
+    private RezervisanaSedistaRepository rezervisanaSedistaRepository;
+    @Autowired
+    RezervacijaRepository rezervacijaRepository;
     @Autowired
     public AdministracijaClanovaController(KorisnikRepository korisnikRepository)
     {
@@ -49,8 +59,22 @@ public class AdministracijaClanovaController
     @GetMapping("/korisnici/delete/{korisnik_id}")
     public String brisanjeKorisnika(@PathVariable("korisnik_id") long korisnik_id, Model model)
     {
-        Korisnik korisnik = korisnikRepository.findById(korisnik_id)
-                .orElseThrow(() -> new IllegalArgumentException("Neispravan ID korisnika:" + korisnik_id));
+        Korisnik korisnik = korisnikRepository.getOne(korisnik_id);
+        Set<Rezervacija> rezervacije = korisnik.getRezervacije();
+        for(Rezervacija r : rezervacije)
+        {
+            Projekcija projekcija = r.getProjekcija();
+            Set<RezervisanaSedista> rezervisanaSedista = r.getRezervisanaSedista();
+            Set<Sediste> sedista = new HashSet<>();
+            for(RezervisanaSedista rs : rezervisanaSedista)
+            {
+                sedista.add(rs.getSediste());
+            }
+            projekcija.getRasporedSedista().removeAll(sedista);
+            projekcijaRepository.save(projekcija);
+            rezervisanaSedistaRepository.deleteAll(rezervisanaSedista);
+        }
+        rezervacijaRepository.deleteAll(rezervacije);
         korisnikRepository.delete(korisnik);
         model.addAttribute("korisnik", korisnikRepository.findAll());
         return "administriranjeClanova";

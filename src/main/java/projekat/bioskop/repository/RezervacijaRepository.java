@@ -21,7 +21,6 @@ public interface RezervacijaRepository extends JpaRepository<Rezervacija, Long>
     @Query("select  r from Rezervacija  r")
     Set<Rezervacija>sveRezervacije();
 
-
     @Query(value = "select rs from RezervisanaSedista rs where rs.rezervacija.korisnik.email like?1")
     RezervisanaSedista nadjiPoMailuKorisnika(String email);
 

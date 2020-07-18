@@ -7,12 +7,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import projekat.bioskop.model.*;
-import projekat.bioskop.repository.KorisnikRepository;
-import projekat.bioskop.repository.ProjekcijaRepository;
-import projekat.bioskop.repository.RezervacijaRepository;
-import projekat.bioskop.repository.SedisteRepository;
+import projekat.bioskop.repository.*;
 
 import javax.validation.Valid;
+import java.util.HashSet;
 import java.util.Set;
 
 
@@ -27,6 +25,8 @@ public class KorisnikController
     KorisnikRepository korisnikRepository;
     @Autowired
     SedisteRepository sedisteRepository;
+    @Autowired
+    RezervisanaSedistaRepository rezervisanaSedistaRepository;
 
     @RequestMapping("/mojeRezervacije")
     public String rezervacijeKorisnika(Model model, Authentication authentication)
@@ -61,6 +61,21 @@ public class KorisnikController
     {
         String ulogovaniKorisnik = authentication.getName();
         korisnik = korisnikRepository.findByEmail(ulogovaniKorisnik);
+        Set<Rezervacija> rezervacije = korisnik.getRezervacije();
+        for(Rezervacija r : rezervacije)
+        {
+            Projekcija projekcija = r.getProjekcija();
+            Set<RezervisanaSedista> rezervisanaSedista = r.getRezervisanaSedista();
+            Set<Sediste> sedista = new HashSet<>();
+            for(RezervisanaSedista rs : rezervisanaSedista)
+            {
+                sedista.add(rs.getSediste());
+            }
+            projekcija.getRasporedSedista().removeAll(sedista);
+            projekcijaRepository.save(projekcija);
+            rezervisanaSedistaRepository.deleteAll(rezervisanaSedista);
+        }
+        rezervacijaRepository.deleteAll(rezervacije);
         korisnikRepository.delete(korisnik);
         return "redirect:/logout";
     }
