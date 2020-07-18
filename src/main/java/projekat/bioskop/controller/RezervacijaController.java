@@ -30,7 +30,7 @@ public class RezervacijaController
     @Autowired
     ProjekcijaRepository projekcijaRepository;
 
-    @Scheduled(fixedRate = 1800000)
+    @Scheduled(fixedRate = 600000)
     @Transactional
     public void automatskoOtkazivanjeRezervacije()
     {
