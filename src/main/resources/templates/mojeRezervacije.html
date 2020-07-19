@@ -40,14 +40,24 @@
                 <td  style="text-align: center; vertical-align: middle;" th:text="${#temporals.format(rezervisanoSediste.getRezervacija().getProjekcija().getKrajProjekcije().toLocalTime(), 'HH:mm') + 'h'}"></td>
                 <td  style="text-align: center; vertical-align: middle;" th:text="${rezervisanoSediste.getRezervacija().getProjekcija().getSala().getBrojSale()}"></td>
                 <td  style="text-align: center; vertical-align: middle;" th:text="${rezervisanoSediste.getSediste().getSedisteId()}"></td>
-                <td  style="text-align: center; vertical-align: middle;" th:text="${rezervisanoSediste.getCenaKarte()}"></td>
+                <div th:if="${rezervisanoSediste.getCenaKarte()==0}">
+                    <td  style="text-align: center; vertical-align: middle;">Ulaz besplatan!</td>
+                </div>
+                <div th:unless="${rezervisanoSediste.getCenaKarte()==0}">
+                    <td  style="text-align: center; vertical-align: middle;" th:text="${rezervisanoSediste.getCenaKarte() + ' RSD'}"></td>
+                </div>
                 <div th:if="${rezervisanoSediste.getRezervacija().getPotvrdjena()==true}">
                     <td style="text-align: center; vertical-align: middle;">Rezervacija je potvrđena!</td>
                     <div th:if="${k.getPoeni()>0}">
+                        <div th:if="${rezervisanoSediste.getCenaKarte()!=0}">
                             <td  style="text-align: center; vertical-align: middle;">
                                 <a class="btn btn-info" th:href="@{/mojeRezervacije/poeni/{sediste_id}(sediste_id=${rezervisanoSediste.getSediste().getSedisteId()})}">Iskoristi</a>
                             </td>
                         </div>
+                        <div th:unless="${rezervisanoSediste.getCenaKarte()!=0}">
+                            <td  style="text-align: center; vertical-align: middle;">Već imate besplatnu ulaznicu!</td>
+                        </div>
+                    </div>
                     <div th:unless="${k.getPoeni()>0}">
                         <td style="text-align: center; vertical-align: middle;">Nemate poena!</td>
                     </div>
@@ -57,7 +67,7 @@
                         <a class="btn btn-primary" th:href="@{/mojeRezervacije/potvrdi/{rezervacija_id}(rezervacija_id=${rezervisanoSediste.getRezervacija().getRezervacijaId()})}">Potvrdi</a>
                     </td>
                     <div th:if="${k.getPoeni()>0}">
-                        <td  style="text-align: center; vertical-align: middle;">Da biste iskoristili poene, potrebno je da potvrdite rezervaciju!</td>
+                        <td style="text-align: center; vertical-align: middle;">Da biste iskoristili poene, potrebno je da potvrdite rezervaciju!</td>
                     </div>
                     <div th:unless="${k.getPoeni()>0}">
                         <td style="text-align: center; vertical-align: middle;">Nemate poena!</td>
@@ -69,6 +79,8 @@
             </tr>
             </tbody>
         </table>
+        <h6 style="font-family: sans-serif; background-color: #343a40; color: white; text-align: center; width: 100%">1 poen vredi 1 RSD. Poeni se koriste isključvo odjednom, osim u slučaju da njihov broj prevazilazi cenu karte! Broj poena možete proveriti na svom profilu!</h6>
+        <h6 style="font-family: sans-serif; background-color: #343a40; color: white; text-align: center; width: 100%">Napomena: Jednom iskorišćeni poeni, ne mogu se vratiti! U slučaju otkazivanja rezervacije, poeni Vam neće biti vraćeni!</h6>
     </form>
 </div>
 </body>

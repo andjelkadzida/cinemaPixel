@@ -170,10 +170,19 @@ public class RezervacijaController
         RezervisanaSedista rs = rezervisanaSedistaRepository.nadjiPoSedistu(sediste_id);
         if(k.getPoeni()>0)
         {
-            double novaCena = rs.getCenaKarte()-k.getPoeni();
-            rs.setCenaKarte(novaCena);
+           if(k.getPoeni()>rs.getCenaKarte())
+           {
+               int poeniNovi = k.getPoeni()-(int)rs.getCenaKarte();
+               k.setPoeni(poeniNovi);
+               rs.setCenaKarte(0);
+           }
+           else
+           {
+               double novaCena = rs.getCenaKarte()-k.getPoeni();
+               rs.setCenaKarte(novaCena);
+               k.setPoeni(0);
+           }
             rezervisanaSedistaRepository.save(rs);
-            k.setPoeni(0);
             korisnikRepository.save(k);
         }
         return "redirect:/mojeRezervacije";
