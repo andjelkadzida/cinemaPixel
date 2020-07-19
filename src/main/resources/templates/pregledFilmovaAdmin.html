@@ -18,7 +18,6 @@
                <th scope="col">Detalji</th>
                <th scope="col">Trailer</th>
                <th scope="col">Projekcije filma</th>
-               <th scope="col">Novi film</th>
                <th scope="col">Izmena filma</th>
                <th scope="col">Brisanje filma</th>
             </tr>
@@ -37,9 +36,6 @@
                 </td>
                 <td style="border: 1px solid black!important; text-align: center; vertical-align: middle;">
                     <a style="position: center" class="btn btn-info" th:href="@{/pregledProjekcijaAdmin/{film}(film=${film.getNazivFilma()})}">Projekcije</a>
-                </td>
-                <td style="border: 1px solid black!important; text-align: center; vertical-align: middle;">
-                    <a style="position: center" class="btn btn-primary" th:href="@{/dodavanjeFilmova}">Dodaj</a>
                 </td>
                 <td style="border: 1px solid black!important; text-align: center; vertical-align: middle;">
                     <a style="position: center" class="btn btn-primary" th:href="@{/izmenaFilmova/{film_id}(film_id=${film.getFilmId()})}">Izmeni</a>

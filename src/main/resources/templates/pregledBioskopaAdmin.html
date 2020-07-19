@@ -14,7 +14,6 @@
                 <th scope="col">Naziv</th>
                 <th scope="col">Grad</th>
                 <th scope="col">Adresa</th>
-                <th scope="col">Novi bioskop</th>
                 <th scope="col">Izmene</th>
                 <th scope="col">Brisanje</th>
             </tr>
@@ -24,9 +23,6 @@
                 <td th:text="${bioskop.naziv}" style="border: 1px solid black!important; text-align: center; vertical-align: middle;"></td>
                 <td th:text="${bioskop.grad}" style="border: 1px solid black!important; text-align: center; vertical-align: middle;"></td>
                 <td th:text="${bioskop.adresa}" style="border: 1px solid black!important; text-align: center; vertical-align: middle;"></td>
-                <td style="border: 1px solid black!important; text-align: center; vertical-align: middle;">
-                    <a style="position: center" class="btn btn-primary" th:href="@{/dodavanjeBioskopa}">Dodaj</a>
-                </td>
                 <td style="border: 1px solid black!important; text-align: center; vertical-align: middle;">
                     <a style="position: center" class="btn btn-primary" th:href="@{/izmenaBioskopa/{bioskop}(bioskop=${bioskop.getBioskopId()})}">Izmeni</a>
                 </td>

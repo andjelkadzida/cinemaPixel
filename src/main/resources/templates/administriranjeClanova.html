@@ -24,10 +24,10 @@
                 <td  style="border: 1px solid black!important; text-align: center; vertical-align: middle;" th:text="${korisnik.prezime}"></td>
                 <td  style="border: 1px solid black!important; text-align: center; vertical-align: middle;" th:text="${korisnik.email}"></td>
                 <td  style="border: 1px solid black!important; text-align: center; vertical-align: middle;">
-                    <a class="btn btn-primary" style="padding: 10px; font-size: 15px; color: white; border: none; border-radius: 5px;" th:href="@{/korisnici/update/{korisnik_id}(korisnik_id=${korisnik.korisnikId})}">Izmeni</a>
+                    <a class="btn btn-primary" style="padding: 10px; font-size: 15px; color: white; border: none; border-radius: 5px;" th:href="@{/korisnici/update/{korisnik_id}(korisnik_id=${korisnik.korisnikId})}">Izmenite podatke korisnika</a>
                 </td>
                 <td  style="border: 1px solid black!important; text-align: center; vertical-align: middle;">
-                    <a class="btn btn-danger" style="padding: 10px; font-size: 15px; color: white; border: none; border-radius: 5px;" th:href="@{/korisnici/delete/{korisnik_id}(korisnik_id=${korisnik.korisnikId})}">Obriši</a>
+                    <a class="btn btn-danger" style="padding: 10px; font-size: 15px; color: white; border: none; border-radius: 5px;" th:href="@{/korisnici/delete/{korisnik_id}(korisnik_id=${korisnik.korisnikId})}">Obrište profil korisnika</a>
                 </td>
             </tr>
             </tbody>
