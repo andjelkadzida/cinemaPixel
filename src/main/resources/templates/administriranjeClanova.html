@@ -4,29 +4,29 @@
     <meta charset="UTF-8">
     <title>Administrator</title>
 </head>
-<body style="background-color: #E5F0FF;">
+<body style="background-color: #cce6ff; font-family: 'Open sans', sans-serif;color: white;">
 <header th:insert="navigacija.html :: nav"></header>
 <div class="container">
     <form th:action="@{/administriranjeClanova}" th:object="${korisnik}" method="post" th:align="center">
-        <table class="table table-bordered" style="border: 1px solid white!important;">
-            <thead style="border: 1px solid white!important;">
-            <tr  style="border: 1px solid white!important;">
-                <th style="border: 1px solid white!important;">Ime</th>
-                <th style="border: 1px solid white!important;">Prezime</th>
-                <th style="border: 1px solid white!important;">Email</th>
-                <th style="border: 1px solid white!important;">Izmene</th>
-                <th style="border: 1px solid white!important;">Brisanje</th>
+        <table class="table">
+            <thead class="table-striped" style="font-family: 'Open sans', sans-serif;border-bottom: 3px solid black!important;">
+            <tr style="font-weight: bold; font-size: larger">
+               <th scope="col">Ime</th>
+               <th scope="col">Prezime</th>
+               <th scope="col">Email</th>
+               <th scope="col">Izmene</th>
+               <th scope="col">Brisanje</th>
             </tr>
             </thead>
-            <tbody style="border: 1px solid white!important;">
-            <tr th:each="korisnik : ${korisnik}" th:if="${(korisnik.tipKorisnika == 'KORISNIK')}" style="border: 1px solid white!important;">
-                <td  style="border: 1px solid white!important; text-align: center; vertical-align: middle;" th:text="${korisnik.ime}"></td>
-                <td  style="border: 1px solid white!important; text-align: center; vertical-align: middle;" th:text="${korisnik.prezime}"></td>
-                <td  style="border: 1px solid white!important; text-align: center; vertical-align: middle;" th:text="${korisnik.email}"></td>
-                <td  style="border: 1px solid white!important; text-align: center; vertical-align: middle;">
+            <tbody style="border: 1px solid black!important;">
+            <tr th:each="korisnik : ${korisnik}" th:if="${(korisnik.tipKorisnika == 'KORISNIK')}" style="border: 1px solid black!important;">
+                <td  style="border: 1px solid black!important; text-align: center; vertical-align: middle;" th:text="${korisnik.ime}"></td>
+                <td  style="border: 1px solid black!important; text-align: center; vertical-align: middle;" th:text="${korisnik.prezime}"></td>
+                <td  style="border: 1px solid black!important; text-align: center; vertical-align: middle;" th:text="${korisnik.email}"></td>
+                <td  style="border: 1px solid black!important; text-align: center; vertical-align: middle;">
                     <a class="btn btn-primary" style="padding: 10px; font-size: 15px; color: white; border: none; border-radius: 5px;" th:href="@{/korisnici/update/{korisnik_id}(korisnik_id=${korisnik.korisnikId})}">Izmeni</a>
                 </td>
-                <td  style="border: 1px solid white!important; text-align: center; vertical-align: middle;">
+                <td  style="border: 1px solid black!important; text-align: center; vertical-align: middle;">
                     <a class="btn btn-danger" style="padding: 10px; font-size: 15px; color: white; border: none; border-radius: 5px;" th:href="@{/korisnici/delete/{korisnik_id}(korisnik_id=${korisnik.korisnikId})}">Obriši</a>
                 </td>
             </tr>

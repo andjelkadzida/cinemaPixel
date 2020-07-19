@@ -4,35 +4,35 @@
     <meta charset="UTF-8">
     <title>Pregled projekcija</title>
 </head>
-    <body style="background-color: #E5F0FF;">
+<body style="background-color: #cce6ff; font-family: 'Open sans', sans-serif;color: white;">
     <header th:insert="navigacija.html :: nav"></header>
     <div>
         <form th:action="@{/izborSedista}" th:object="${projekcija}" method="post" th:align="center">
-            <table class="table table-bordered" style="border: 1px solid white!important;">
-                <thead style="border: 1px solid white!important; text-align: center; vertical-align: middle;">
-                <tr  style="border: 1px solid white!important; text-align: center; vertical-align: middle;">
-                    <th>Naslov filma</th>
-                    <th>Grad</th>
-                    <th>Datum projekcije</th>
-                    <th>Početak projekcije</th>
-                    <th>Kraj projekcije</th>
-                    <th>Broj sale</th>
-                    <th>Rezerviši kartu</th>
+            <table class="table">
+                <thead class="table-striped" style="font-family: 'Open sans', sans-serif;border-bottom: 3px solid black!important;">
+                <tr style="font-weight: bold; font-size: larger">
+                    <th scope="col">Naslov filma</th>
+                    <th scope="col">Grad</th>
+                    <th scope="col">Datum projekcije</th>
+                    <th scope="col">Početak projekcije</th>
+                    <th scope="col">Kraj projekcije</th>
+                    <th scope="col">Broj sale</th>
+                    <th scope="col">Rezerviši kartu</th>
                 </tr>
                 </thead>
-                <tbody  style="border: 1px solid white!important; text-align: center; vertical-align: middle;">
-                <tr  style="border: 1px solid white!important; text-align: center; vertical-align: middle;" th:each="projekcija : ${projekcija}">
-                    <td  style="border: 1px solid white!important; text-align: center; vertical-align: middle;" th:text="${projekcija.getFilm().getNazivFilma()}"></td>
-                    <td  style="border: 1px solid white!important; text-align: center; vertical-align: middle;" th:text="${projekcija.getSala().getBioskop().getGrad()}"></td>
-                    <td  style="border: 1px solid white!important; text-align: center; vertical-align: middle;" th:text="${#temporals.format(projekcija.getPocetakProjekcije().toLocalDate(), 'dd-MM-yyyy')}"></td>
-                    <td  style="border: 1px solid white!important; text-align: center; vertical-align: middle;" th:text="${#temporals.format(projekcija.getPocetakProjekcije().toLocalTime(), 'HH:mm') + 'h'}"></td>
-                    <td  style="border: 1px solid white!important; text-align: center; vertical-align: middle;" th:text="${#temporals.format(projekcija.getKrajProjekcije().toLocalTime(), 'HH:mm') + 'h'}"></td>
-                    <td  style="border: 1px solid white!important; text-align: center; vertical-align: middle;" th:text="${projekcija.getSala().getBrojSale()}"></td>
+                <tbody  style="border: 1px solid black!important; text-align: center; vertical-align: middle;">
+                <tr  style="border: 1px solid black!important; text-align: center; vertical-align: middle;" th:each="projekcija : ${projekcija}">
+                    <td  style="border: 1px solid black!important; text-align: center; vertical-align: middle;" th:text="${projekcija.getFilm().getNazivFilma()}"></td>
+                    <td  style="border: 1px solid black!important; text-align: center; vertical-align: middle;" th:text="${projekcija.getSala().getBioskop().getGrad()}"></td>
+                    <td  style="border: 1px solid black!important; text-align: center; vertical-align: middle;" th:text="${#temporals.format(projekcija.getPocetakProjekcije().toLocalDate(), 'dd-MM-yyyy')}"></td>
+                    <td  style="border: 1px solid black!important; text-align: center; vertical-align: middle;" th:text="${#temporals.format(projekcija.getPocetakProjekcije().toLocalTime(), 'HH:mm') + 'h'}"></td>
+                    <td  style="border: 1px solid black!important; text-align: center; vertical-align: middle;" th:text="${#temporals.format(projekcija.getKrajProjekcije().toLocalTime(), 'HH:mm') + 'h'}"></td>
+                    <td  style="border: 1px solid black!important; text-align: center; vertical-align: middle;" th:text="${projekcija.getSala().getBrojSale()}"></td>
                     <div th:if="${danas.isAfter(projekcija.getPocetakProjekcije())}">
                         <td>Nije moguće izvršiti rezervaciju za projekciju koja je u toku ili je završena!</td>
                     </div>
                     <div th:unless="${danas.isAfter(projekcija.getPocetakProjekcije())}">
-                        <td  style="border: 1px solid white!important; text-align: center; vertical-align: middle;">
+                        <td  style="border: 1px solid black!important; text-align: center; vertical-align: middle;">
                             <form th:action="@{/izborSedista}" method="post">
                                 <input type="hidden" th:value="${projekcija.getProjekcijaId()}" name="projekcijaId">
                                 <input type="submit" value="Izbor sedista" class="btn btn-primary">

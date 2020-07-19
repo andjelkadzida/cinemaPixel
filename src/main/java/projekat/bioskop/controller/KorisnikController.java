@@ -36,7 +36,7 @@ public class KorisnikController
         Set<RezervisanaSedista> rezervisanaSedistaSet = rezervacijaRepository.nadjiPoEmailu(authentication.getName());
         for(RezervisanaSedista rs: rezervisanaSedistaSet)
         {
-          rs.getRezervacija().getProjekcija().getSala().getBioskop().getGrad();
+            rs.getRezervacija().getProjekcija().getSala().getBioskop().getGrad();
             rs.getRezervacija().getProjekcija().getFilm().getNazivFilma();
             rs.getRezervacija().getProjekcija().getFilm().getZanr();
             rs.getRezervacija().getProjekcija().getFilm().getTehnologija();

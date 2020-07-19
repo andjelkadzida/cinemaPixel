@@ -4,51 +4,51 @@
     <meta charset="UTF-8">
     <title>Moje rezervacije</title>
 </head>
-<body>
+<body style="font-family: 'Open sans', sans-serif;">
 <header th:insert="navigacija.html :: nav"></header><pre style="margin-bottom: 3px"></pre>
 <div align="center" class="text-white bg-dark">
     <form th:action="@{/mojeRezervacije}" method="post" th:align="center">
     <h2 th:text="${k.getIme() + ' ' + k.getPrezime()}" align="center" class="text-white bg-dark"></h2>
         <table class="table table-bordered table-dark" style="table-layout:auto;">
-            <thead  style="text-align: center">
+            <thead style="text-align: center; vertical-align: middle;">
             <tr>
-                <th  style="text-align: center">Grad</th>
-                <th  style="text-align: center">Naziv filma</th>
-                <th  style="text-align: center">Žanr</th>
-                <th  style="text-align: center">Tehnologija</th>
-                <th  style="text-align: center">Trajanje</th>
-                <th  style="text-align: center">Datum projekcije</th>
-                <th  style="text-align: center">Početak projekcije</th>
-                <th  style="text-align: center">Kraj projekcije</th>
-                <th  style="text-align: center">Broj sale</th>
-                <th  style="text-align: center">Sedište</th>
-                <th  style="text-align: center">Cena karte</th>
-                <th  style="text-align: center">Potvrda rezervacije</th>
-                <th  style="text-align: center">Otkazivanje rezervacije</th>
+                <th  style="text-align: center; vertical-align: middle;">Grad</th>
+                <th  style="text-align: center; vertical-align: middle;">Naziv filma</th>
+                <th  style="text-align: center; vertical-align: middle;">Žanr</th>
+                <th  style="text-align: center; vertical-align: middle;">Tehnologija</th>
+                <th  style="text-align: center; vertical-align: middle;">Trajanje</th>
+                <th  style="text-align: center; vertical-align: middle;">Datum projekcije</th>
+                <th  style="text-align: center; vertical-align: middle;">Početak projekcije</th>
+                <th  style="text-align: center; vertical-align: middle;">Kraj projekcije</th>
+                <th  style="text-align: center; vertical-align: middle;">Broj sale</th>
+                <th  style="text-align: center; vertical-align: middle;">Sedište</th>
+                <th  style="text-align: center; vertical-align: middle;">Cena karte</th>
+                <th  style="text-align: center; vertical-align: middle;">Potvrda rezervacije</th>
+                <th  style="text-align: center; vertical-align: middle;">Otkazivanje rezervacije</th>
             </tr>
             </thead>
-            <tbody  style="text-align: center">
+            <tbody  style="text-align: center; vertical-align: middle;">
             <tr th:each="rezervisanoSediste : ${rezervisanaSedistaSet}">
-                <td  style="text-align: center" th:text="${rezervisanoSediste.getRezervacija().getProjekcija().getSala().getBioskop().getGrad()}"></td>
-                <td  style="text-align: center" th:text="${rezervisanoSediste.getRezervacija().getProjekcija().getFilm().getNazivFilma()}"></td>
-                <td  style="text-align: center" th:text="${rezervisanoSediste.getRezervacija().getProjekcija().getFilm().getZanr()}"></td>
-                <td  style="text-align: center" th:text="${rezervisanoSediste.getRezervacija().getProjekcija().getFilm().getTehnologija()}"></td>
-                <td  style="text-align: center" th:text="${rezervisanoSediste.getRezervacija().getProjekcija().getFilm().getTrajanje()} + ' minuta'"></td>
-                <td  style="text-align: center" th:text="${#temporals.format(rezervisanoSediste.getRezervacija().getProjekcija().getPocetakProjekcije(), 'dd-MM-yyyy')}"></td>
-                <td  style="text-align: center" th:text="${#temporals.format(rezervisanoSediste.getRezervacija().getProjekcija().getPocetakProjekcije().toLocalTime(), 'HH:mm') + 'h'}"></td>
-                <td  style="text-align: center" th:text="${#temporals.format(rezervisanoSediste.getRezervacija().getProjekcija().getKrajProjekcije().toLocalTime(), 'HH:mm') + 'h'}"></td>
-                <td  style="text-align: center" th:text="${rezervisanoSediste.getRezervacija().getProjekcija().getSala().getBrojSale()}"></td>
-                <td  style="text-align: center" th:text="${rezervisanoSediste.getSediste().getSedisteId()}"></td>
-                <td  style="text-align: center" th:text="${rezervisanoSediste.getCenaKarte()}"></td>
+                <td  style="text-align: center; vertical-align: middle;" th:text="${rezervisanoSediste.getRezervacija().getProjekcija().getSala().getBioskop().getGrad()}"></td>
+                <td  style="text-align: center; vertical-align: middle;" th:text="${rezervisanoSediste.getRezervacija().getProjekcija().getFilm().getNazivFilma()}"></td>
+                <td  style="text-align: center; vertical-align: middle;" th:text="${rezervisanoSediste.getRezervacija().getProjekcija().getFilm().getZanr()}"></td>
+                <td  style="text-align: center; vertical-align: middle;" th:text="${rezervisanoSediste.getRezervacija().getProjekcija().getFilm().getTehnologija()}"></td>
+                <td  style="text-align: center; vertical-align: middle;" th:text="${rezervisanoSediste.getRezervacija().getProjekcija().getFilm().getTrajanje()} + ' minuta'"></td>
+                <td  style="text-align: center; vertical-align: middle;" th:text="${#temporals.format(rezervisanoSediste.getRezervacija().getProjekcija().getPocetakProjekcije(), 'dd-MM-yyyy')}"></td>
+                <td  style="text-align: center; vertical-align: middle;" th:text="${#temporals.format(rezervisanoSediste.getRezervacija().getProjekcija().getPocetakProjekcije().toLocalTime(), 'HH:mm') + 'h'}"></td>
+                <td  style="text-align: center; vertical-align: middle;" th:text="${#temporals.format(rezervisanoSediste.getRezervacija().getProjekcija().getKrajProjekcije().toLocalTime(), 'HH:mm') + 'h'}"></td>
+                <td  style="text-align: center; vertical-align: middle;" th:text="${rezervisanoSediste.getRezervacija().getProjekcija().getSala().getBrojSale()}"></td>
+                <td  style="text-align: center; vertical-align: middle;" th:text="${rezervisanoSediste.getSediste().getSedisteId()}"></td>
+                <td  style="text-align: center; vertical-align: middle;" th:text="${rezervisanoSediste.getCenaKarte()}"></td>
                 <div th:if="${rezervisanoSediste.getRezervacija().getPotvrdjena()==true}">
-                    <td  style="text-align: center">Rezervacija je potvrđena!</td>
+                    <td  style="text-align: center; vertical-align: middle;">Rezervacija je potvrđena!</td>
                 </div>
                 <div th:unless="${rezervisanoSediste.getRezervacija().getPotvrdjena()==true}">
-                    <td  style="text-align: center">
+                    <td  style="text-align: center; vertical-align: middle;">
                         <a class="btn btn-primary" th:href="@{/mojeRezervacije/potvrdi/{rezervacija_id}(rezervacija_id=${rezervisanoSediste.getRezervacija().getRezervacijaId()})}">Potvrdi</a>
                     </td>
                 </div>
-                <td  style="text-align: center">
+                <td  style="text-align: center; vertical-align: middle;">
                     <a class="btn btn-danger" th:href="@{/mojeRezervacije/delete/{rezervacija_id}(rezervacija_id=${rezervisanoSediste.getRezervacija().getRezervacijaId()})}">Otkaži</a>
                 </td>
             </tr>

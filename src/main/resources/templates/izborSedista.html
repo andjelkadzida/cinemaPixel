@@ -5,12 +5,12 @@
         <meta charset="UTF-8">
         <title>Rezervacija karte</title>
     </head>
-<body style="background-color: #E5F0FF;">
+<body style="background-color: #cce6ff; font-family: 'Open sans', sans-serif;">
 <header th:insert="navigacija.html :: nav"></header>
 <form th:action="@{/selektovanaSedista}" method="post">
     <div class="container">
         <div class="sc">
-            <h1 style="text-align:center;color:#FFFFFF;background-color:#4c60af;padding:10px;">Izbor sedišta</h1><br>
+            <h1 style="text-align:center;color:#FFFFFF;background-color:#4c60af;padding:10px; border-radius: 1px 1px 10px 10px;">Izbor sedišta</h1><br>
         </div>
         <table>
             <!--Nisu clanovi klubova -->
@@ -18,12 +18,12 @@
                <section th:each="sediste:${sedista}" style="width:46%;float:left;margin:0 2%;">
                    <div th:if="${sediste.getTipSedista().equals('Standardno')}">
                        <div th:if="${rs.contains(sediste)}">
-                           <label style="display:block;padding: 5px 10px;margin: 5px 0;font:14px/20px sans-serif, sans-serif;background-color: #FF0000;border-radius: 7px;" >
+                           <label style="display:block;padding: 5px 10px;margin: 5px 0;font:14px/20px sans-serif, sans-serif;background-color: #ff6633;border-radius: 7px;" >
                                <input type="checkbox" name="sediste" th:value="${sediste.getSedisteId()}" th:text="' ' + ${sediste.getSedisteId()}" style="position: relative;top: 1px;" disabled>
                            </label>
                        </div>
                        <div th:unless="${rs.contains(sediste)}">
-                           <label style="display:block;padding: 5px 10px;margin: 5px 0;font: 14px/20px sans-serif, sans-serif;background-color: #00FF00;border-radius: 7px;" >
+                           <label style="display:block;padding: 5px 10px;margin: 5px 0;font: 14px/20px sans-serif, sans-serif;background-color:  #66ffff;border-radius: 7px;" >
                                <input type="checkbox" name="sediste" th:value="${sediste.getSedisteId()}" th:text="' ' + ${sediste.getSedisteId()}" style="position: relative;top: 1px;">
                            </label>
                        </div>
@@ -36,12 +36,12 @@
                 <section th:each="sediste:${sedista}" style="width:46%;float:left;margin:0 2%;">
                     <div th:if="${sediste.getTipSedista().equals('Specijalno')}">
                         <div th:if="${rs.contains(sediste)}">
-                            <label style="display:block;padding: 5px 10px;margin: 5px 0;font:14px/20px sans-serif, sans-serif;background-color: #4646FF;border-radius: 7px;" >
+                            <label style="display:block;padding: 5px 10px;margin: 5px 0;font:14px/20px sans-serif, sans-serif;background-color: #e63900;border-radius: 7px;" >
                                 <input type="checkbox" name="sediste" th:value="${sediste.getSedisteId()}" th:text="' ' + ${sediste.getSedisteId()}" style="position: relative;top: 1px;" disabled>
                             </label>
                         </div>
                         <div th:unless="${rs.contains(sediste)}">
-                            <label style="display:block;padding: 5px 10px;margin: 5px 0;font: 14px/20px sans-serif, sans-serif;background-color: #ffff00;border-radius: 7px;" >
+                            <label style="display:block;padding: 5px 10px;margin: 5px 0;font: 14px/20px sans-serif, sans-serif;background-color: #cc99ff;border-radius: 7px;" >
                                 <input type="checkbox" name="sediste" th:value="${sediste.getSedisteId()}" th:text="' ' + ${sediste.getSedisteId()}" style="position: relative;top: 1px;">
                             </label>
                         </div>
@@ -54,16 +54,16 @@
         <table>
             <div style="width: 20%; position: relative; margin-left: 870px;">
                 <h3 align="center">Legenda</h3>
-                <label style="display:block;padding: 5px 10px;margin: 5px 0;font: 14px/20px sans-serif, sans-serif;background-color: #ffff00;border-radius: 7px; color: #000000;">Slobodna specijalna sedišta</label>
-                <label style="display:block;padding: 5px 10px;margin: 5px 0;font:14px/20px sans-serif, sans-serif;background-color: #4646FF;border-radius: 7px; color: #000000;">Zauzeta specijalna sedišta</label>
-                <label style="display:block;padding: 5px 10px;margin: 5px 0;font: 14px/20px sans-serif, sans-serif;background-color: #00FF00;border-radius: 7px;color: #000000;">Slobodna sedišta</label>
-                <label style="display:block;padding: 5px 10px;margin: 5px 0;font:14px/20px sans-serif, sans-serif;background-color: #FF0000;border-radius: 7px;color: #000000;" >Zauzeta sedišta</label>
+                <label style="display:block;padding: 5px 10px;margin: 5px 0;font: 14px/20px sans-serif, sans-serif;background-color:  #66ffff;border-radius: 7px;color: #000000;">Slobodna sedišta</label>
+                <label style="display:block;padding: 5px 10px;margin: 5px 0;font:14px/20px sans-serif, sans-serif;background-color: #ff6633;border-radius: 7px;color: #000000;" >Zauzeta sedišta</label>
+                <label style="display:block;padding: 5px 10px;margin: 5px 0;font: 14px/20px sans-serif, sans-serif;background-color: #cc99ff;border-radius: 7px; color: #000000;">Slobodna specijalna sedišta</label>
+                <label style="display:block;padding: 5px 10px;margin: 5px 0;font:14px/20px sans-serif, sans-serif;background-color: #e63900;border-radius: 7px; color: #000000;">Zauzeta specijalna sedišta</label>
             </div>
         </table>
     </div>
         <div class="input-group" style="margin: 10px 0px 10px 0px; font-family: 'Open Sans', sans-serif;">
             <input type="hidden" name="projekcijaId" th:value="${projekcijaId}">
-            <input type="submit" style="padding: 10px; font-size: 15px; color: white; background: #4c60af; border: none; border-radius: 5px; margin-left: 900px; font-family: 'Open Sans', sans-serif;" value="Potvrdite rezervaciju">
+            <input type="submit" style="padding: 10px; font-size: 15px; color: white; background: #4c60af; border: none; border-radius: 5px; margin-left: 850px; font-family: 'Open Sans', sans-serif;" value="Potvrdite rezervaciju">
         </div>
     </div>
 </form>
