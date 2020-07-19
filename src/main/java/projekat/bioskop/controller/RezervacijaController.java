@@ -96,9 +96,8 @@ public class RezervacijaController
             }
         }
     }
-
     //Automatsko brisanje svih rezervacija i rezervisanih sedista za projekcije koje su zavrsene, metoda se okida jednom dnevno
-    @Scheduled(fixedRate = 86400000)
+    @Scheduled(cron = "0 0 12 01 * ?")
     @Transactional
     public void automatskoBrisanjeRezervacijaZaZavrseneProjekcije()
     {

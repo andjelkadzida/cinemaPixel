@@ -10,6 +10,7 @@ import projekat.bioskop.model.*;
 import projekat.bioskop.repository.*;
 
 import javax.validation.Valid;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -31,20 +32,22 @@ public class KorisnikController
     @RequestMapping("/mojeRezervacije")
     public String rezervacijeKorisnika(Model model, Authentication authentication)
     {
+        LocalDateTime trenutno = LocalDateTime.now();
+        model.addAttribute("trenutno",trenutno);
         Korisnik k = korisnikRepository.findByEmail(authentication.getName());
         model.addAttribute("k", k);
         Set<RezervisanaSedista> rezervisanaSedistaSet = rezervacijaRepository.nadjiPoEmailu(authentication.getName());
         for(RezervisanaSedista rs: rezervisanaSedistaSet)
         {
-            rs.getRezervacija().getProjekcija().getSala().getBioskop().getGrad();
-            rs.getRezervacija().getProjekcija().getFilm().getNazivFilma();
-            rs.getRezervacija().getProjekcija().getFilm().getZanr();
-            rs.getRezervacija().getProjekcija().getFilm().getTehnologija();
-            rs.getRezervacija().getProjekcija().getFilm().getTrajanje();
-            rs.getRezervacija().getProjekcija().getPocetakProjekcije();
-            rs.getRezervacija().getProjekcija().getSala().getBrojSale();
-            rs.getSediste().getSedisteId();
-            model.addAttribute("rezervisanaSedistaSet", rezervisanaSedistaSet);
+                rs.getRezervacija().getProjekcija().getSala().getBioskop().getGrad();
+                rs.getRezervacija().getProjekcija().getFilm().getNazivFilma();
+                rs.getRezervacija().getProjekcija().getFilm().getZanr();
+                rs.getRezervacija().getProjekcija().getFilm().getTehnologija();
+                rs.getRezervacija().getProjekcija().getFilm().getTrajanje();
+                rs.getRezervacija().getProjekcija().getPocetakProjekcije();
+                rs.getRezervacija().getProjekcija().getSala().getBrojSale();
+                rs.getSediste().getSedisteId();
+                model.addAttribute("rezervisanaSedistaSet", rezervisanaSedistaSet);
         }
         return "mojeRezervacije";
     }

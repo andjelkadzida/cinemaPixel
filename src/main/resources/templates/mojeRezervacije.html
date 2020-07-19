@@ -30,6 +30,7 @@
             </thead>
             <tbody  style="text-align: center; vertical-align: middle;">
             <tr th:each="rezervisanoSediste : ${rezervisanaSedistaSet}">
+                <div th:if="${rezervisanoSediste.getRezervacija().getProjekcija().getKrajProjekcije().isAfter(trenutno)}">
                 <td  style="text-align: center; vertical-align: middle;" th:text="${rezervisanoSediste.getRezervacija().getProjekcija().getSala().getBioskop().getGrad()}"></td>
                 <td  style="text-align: center; vertical-align: middle;" th:text="${rezervisanoSediste.getRezervacija().getProjekcija().getFilm().getNazivFilma()}"></td>
                 <td  style="text-align: center; vertical-align: middle;" th:text="${rezervisanoSediste.getRezervacija().getProjekcija().getFilm().getZanr()}"></td>
@@ -76,6 +77,7 @@
                 <td  style="text-align: center; vertical-align: middle;">
                     <a class="btn btn-danger" th:href="@{/mojeRezervacije/delete/{rezervacija_id}(rezervacija_id=${rezervisanoSediste.getRezervacija().getRezervacijaId()})}">Otkaži</a>
                 </td>
+                </div>
             </tr>
             </tbody>
         </table>
