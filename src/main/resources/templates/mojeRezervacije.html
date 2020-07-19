@@ -24,6 +24,7 @@
                 <th  style="text-align: center; vertical-align: middle;">Sedište</th>
                 <th  style="text-align: center; vertical-align: middle;">Cena karte</th>
                 <th  style="text-align: center; vertical-align: middle;">Potvrda rezervacije</th>
+                <th  style="text-align: center; vertical-align: middle;">Korišćenje poena</th>
                 <th  style="text-align: center; vertical-align: middle;">Otkazivanje rezervacije</th>
             </tr>
             </thead>
@@ -41,12 +42,26 @@
                 <td  style="text-align: center; vertical-align: middle;" th:text="${rezervisanoSediste.getSediste().getSedisteId()}"></td>
                 <td  style="text-align: center; vertical-align: middle;" th:text="${rezervisanoSediste.getCenaKarte()}"></td>
                 <div th:if="${rezervisanoSediste.getRezervacija().getPotvrdjena()==true}">
-                    <td  style="text-align: center; vertical-align: middle;">Rezervacija je potvrđena!</td>
+                    <td style="text-align: center; vertical-align: middle;">Rezervacija je potvrđena!</td>
+                    <div th:if="${k.getPoeni()>0}">
+                            <td  style="text-align: center; vertical-align: middle;">
+                                <a class="btn btn-info" th:href="@{/mojeRezervacije/poeni/{sediste_id}(sediste_id=${rezervisanoSediste.getSediste().getSedisteId()})}">Iskoristi</a>
+                            </td>
+                        </div>
+                    <div th:unless="${k.getPoeni()>0}">
+                        <td style="text-align: center; vertical-align: middle;">Nemate poena!</td>
+                    </div>
                 </div>
                 <div th:unless="${rezervisanoSediste.getRezervacija().getPotvrdjena()==true}">
                     <td  style="text-align: center; vertical-align: middle;">
                         <a class="btn btn-primary" th:href="@{/mojeRezervacije/potvrdi/{rezervacija_id}(rezervacija_id=${rezervisanoSediste.getRezervacija().getRezervacijaId()})}">Potvrdi</a>
                     </td>
+                    <div th:if="${k.getPoeni()>0}">
+                        <td  style="text-align: center; vertical-align: middle;">Da biste iskoristili poene, potrebno je da potvrdite rezervaciju!</td>
+                    </div>
+                    <div th:unless="${k.getPoeni()>0}">
+                        <td style="text-align: center; vertical-align: middle;">Nemate poena!</td>
+                    </div>
                 </div>
                 <td  style="text-align: center; vertical-align: middle;">
                     <a class="btn btn-danger" th:href="@{/mojeRezervacije/delete/{rezervacija_id}(rezervacija_id=${rezervisanoSediste.getRezervacija().getRezervacijaId()})}">Otkaži</a>

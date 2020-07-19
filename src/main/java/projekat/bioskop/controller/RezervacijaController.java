@@ -163,5 +163,20 @@ public class RezervacijaController
         rezervacijaRepository.save(rezervacija);
         return "redirect:/mojeRezervacije";
     }
+    @RequestMapping(value = "/mojeRezervacije/poeni/{sediste_id}")
+    public String iskoristiPoene(Model model, @PathVariable("sediste_id") long sediste_id, Authentication authentication)
+    {
+        Korisnik k = korisnikRepository.findByEmail(authentication.getName());
+        RezervisanaSedista rs = rezervisanaSedistaRepository.nadjiPoSedistu(sediste_id);
+        if(k.getPoeni()>0)
+        {
+            double novaCena = rs.getCenaKarte()-k.getPoeni();
+            rs.setCenaKarte(novaCena);
+            rezervisanaSedistaRepository.save(rs);
+            k.setPoeni(0);
+            korisnikRepository.save(k);
+        }
+        return "redirect:/mojeRezervacije";
+    }
 
 }

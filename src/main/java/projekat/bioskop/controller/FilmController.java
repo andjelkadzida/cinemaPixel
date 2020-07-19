@@ -1,5 +1,6 @@
 package projekat.bioskop.controller;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -122,8 +123,8 @@ public class FilmController
                 SimpleMailMessage mail = new SimpleMailMessage();
                 mail.setTo(mailKorisnika);
                 mail.setSubject("Nova rezervacija");
-                mail.setText("Zdravo " + k.getIme() + "!" + "\n" + "U naš bioskop je pristigla tvoja rezervacija!" + "\n"  +  "Podaci o bioskopu: " + "\n" +
-                "Naziv bioskopa: " +  p.getSala().getBioskop().getNaziv() + ", adresa: " + p.getSala().getBioskop().getAdresa() + ", grad: " + p.getSala().getBioskop().getGrad() + "\n" + "Podaci o filmu:" + "\n" + "Naziv filma: " + p.getFilm().getNazivFilma() + ", zanr: " + p.getFilm().getZanr() + ", tehnologija: " +  p.getFilm().getTehnologija() + ", trajanje: " + p.getFilm().getTrajanje() + " minuta" + "\n" + "Podaci o projekciji: " + "\n" + "Datum projekcije: " + p.getPocetakProjekcije().toLocalDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + ", početak projekcije: " + p.getPocetakProjekcije().toLocalTime() + "h" + ", kraj projekcije " +p.getKrajProjekcije().toLocalTime() + "h" + "\n" + "Broj sale: " + p.getSala().getBrojSale() + "\n" + "Sedišta: " + rezervisanaSedista.getSediste().getSedisteId() + "\n" + "Cena karte: " + rezervisanaSedista.getCenaKarte() + " RSD");
+                mail.setText("Zdravo " + k.getIme() + "!" + "\n" + "U naš bioskop je pristigla tvoja rezervacija!" + "\n"  + "Podaci o bioskopu: " + "\n" +
+                        "Naziv bioskopa: " +  p.getSala().getBioskop().getNaziv() + ", adresa: " + p.getSala().getBioskop().getAdresa() + ", grad: " + p.getSala().getBioskop().getGrad() + "\n" + "Podaci o filmu:" + "\n" + "Naziv filma: " + p.getFilm().getNazivFilma() + ", zanr: " + p.getFilm().getZanr() + ", tehnologija: " +  p.getFilm().getTehnologija() + ", trajanje: " + p.getFilm().getTrajanje() + " minuta" + "\n" + "Podaci o projekciji: " + "\n" + "Datum projekcije: " + p.getPocetakProjekcije().toLocalDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + ", početak projekcije: " + p.getPocetakProjekcije().toLocalTime() + "h" + ", kraj projekcije " +p.getKrajProjekcije().toLocalTime() + "h" + "\n" + "Broj sale: " + p.getSala().getBrojSale() + "\n" + "Sedišta: " + rezervisanaSedista.getSediste().getSedisteId() + "\n" + "Cena karte: " + rezervisanaSedista.getCenaKarte() + " RSD");
                 javaMailSender.send(mail);
             }
             catch (MailException exception)
