@@ -34,14 +34,6 @@ public class MenadzerController
         for(RezervisanaSedista rs: rezervisanaSedistaSet)
         {
             zarada+=rs.getCenaKarte();
-            if(!rs.getRezervacija().getPotvrdjena())
-            {
-                zarada-=rs.getCenaKarte();
-            }
-            else
-            {
-                
-            }
             rs.getRezervacija().getProjekcija().getSala().getBioskop().getGrad();
             rs.getRezervacija().getProjekcija().getFilm().getNazivFilma();
             rs.getRezervacija().getProjekcija().getFilm().getZanr();
