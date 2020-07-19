@@ -30,6 +30,7 @@ public class RezervacijaController
     @Autowired
     ProjekcijaRepository projekcijaRepository;
 
+    //Automatsko otkazivanje rezervacija 30 minuta pre pocetka projekcije
     @Scheduled(fixedRate = 600000)
     @Transactional
     public void automatskoOtkazivanjeRezervacije()
@@ -96,6 +97,41 @@ public class RezervacijaController
         }
     }
 
+    //Automatsko brisanje svih rezervacija i rezervisanih sedista za projekcije koje su zavrsene, metoda se okida jednom dnevno
+    @Scheduled(fixedRate = 86400000)
+    @Transactional
+    public void automatskoBrisanjeRezervacijaZaZavrseneProjekcije()
+    {
+        Set<Projekcija>projekcije = projekcijaRepository.sveProjekcije();
+        Set<Korisnik> korisnici = korisnikRepository.sviKorisnici();
+        Set<Rezervacija> rezervacije = rezervacijaRepository.sveRezervacije();
+        LocalDateTime trenutno = LocalDateTime.now();
+        for(Rezervacija r:rezervacije)
+        {
+            Set<RezervisanaSedista> rezervisanaSedistas = rezervacijaRepository.nadjiPoIdRezervacijeSet(r.getRezervacijaId());
+            Projekcija p = projekcijaRepository.getOne(r.getProjekcija().getProjekcijaId());
+            Set<Sediste> sedisteSet = p.getRasporedSedista();
+            Set<Sediste> nov = new HashSet<>();
+            if(p.getKrajProjekcije().isBefore(trenutno))
+            {
+                for(Korisnik k:korisnici)
+                {
+                    for(Sediste s:sedisteSet)
+                    {
+                        for(RezervisanaSedista rs: rezervisanaSedistas)
+                        {
+                            nov.add(s);
+                            rezervisanaSedistaRepository.delete(rs);
+                        }
+                    }
+                }
+                sedisteSet.removeAll(nov);
+                p.setRasporedSedista(sedisteSet);
+                projekcijaRepository.save(p);
+                rezervacijaRepository.delete(r);
+            }
+        }
+    }
     @RequestMapping(value = "/mojeRezervacije/delete/{rezervacija_id}", method = RequestMethod.GET)
     public String otkazivanjeRezervacije(@PathVariable("rezervacija_id") Long rezervacija_id, Authentication auth)
     {
@@ -113,7 +149,6 @@ public class RezervacijaController
             {
                 if(s.getSedisteId()==rss.getSediste().getSedisteId())
                 {
-
                     xy.add(s);
                     if(s.getTipSedista().equals("Specijalno"))
                     {
