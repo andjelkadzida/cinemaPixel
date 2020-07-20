@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head th:insert="navigacija.html :: headerfiles">
+    <meta charset="UTF-8">
+    <title>Uslovi korišćenja</title>
+</head>
+<body style="background-color: #cce6ff; font-family: 'Open sans', sans-serif;color: black;  margin: 0 auto;">
+<header th:insert="navigacija.html :: nav"></header><pre style="margin-top: 1px;"></pre>
+<h1 style="text-align: center;font-size: 50px;color: white; background-color: #4c60af;">Uslovi korišćenja</h1>
+  <h2 style="text-decoration: underline;">Registracija</h2><br>
+<p>Da biste mogli da izvršite rezervaciju za određenu projekciju, potrebno je da se registrujete na sajt. Prilikom registracije, potrebno je da ostavite sledeće podatke:</p>
+<ul>
+    <li>Ime</li>
+    <li>Prezime</li>
+    <li>E-mail adresa</li>
+</ul>
+  <h2 style="text-decoration: underline;">Rezervacije</h2><br>
+<p>Da biste rezervisali sedište za određenu projekciju, potrebno je da se registrujete, odnosno da se ulogujete (ako već imate nalog), da izaberete film i projekciju koju želite. Nakon toga, u skladu sa time da li ste član kluba, pojaviće Vam se raspored sedišta.</p>
+<p>Nakon izbora sedišta, potrebno je da kliknete na dugme za potvrdu rezervacije, nakon čega će se Vaša rezervacija pojaviti u delu sa rezervacijama.</p>
+<p>Prilikom rezervacije, možete rezervisati više sedište odjednom.</p> 
+<p>Nakon rezervacije karte, na e-mail koji se ostavili prilikom registracije, dobićete obaveštenje o uspešnoj rezervaciji.</p>
+  <h2 style="text-decoration: underline;">Potvrda rezervacije</h2><br>
+<p>U slučaju potvrđivanja potvrda se odnosi na sva sedišta za tu rezervaciju.</p>
+  <h2 style="text-decoration: underline;">Otkazivanje rezervacije</h2><br>
+<p>U slučaju otkazivanja rezervacije, otkazivanje se odnosi na sva sedišta za tu rezervaciju.</p>
+<p>Korisnik u svakom trenutku može otkazati svoju rezervaciju. Takođe, rezervacija se automatski otkazuje, u slučaju da korisnik istu ne potvrdi najkasnije 35 mminuta pre početka projekcije.</p> 
+<p>Otkazivanjem rezervacije, korisnik gubi poene ostvarene na konto te rezervacije.</p>
+  <h2 style="text-decoration: underline;">Izmena rezervacije</h2><br>
+<p>Izmena rezervacije nije moguća. U slučaju greške, otkažite rezervaciju i napravite novu.</p>
+  <h2 style="text-decoration: underline;">Članstvo u klubu</h2><br>
+<p>Svaki registrovani korisnik se u svakom trenutku može učlaniti ili išćlaniti iz kluba. Članstvo u klubu je besplatno, ali donosi veliki broj pogodnosti.</p>
+  <h2 style="text-decoration: underline;">Članovi kluba</h2><br>
+<p>Članovi kluba mogu rezervisati specijalna sedišta namenjena samo za njih. Osim toga, ostvaruju popuste na kupovinu grickalica i pića pre same projekcije.</p>
+  <h2 style="text-decoration: underline;">Poeni</h2><br>
+<p>Prilikom svake rezervacije sedišta, korisnik ostvaruje određeni broj poena na osnovu toga koje sedište je rezervisao i da li je član VIP kluba.</p> 
+<p>Za svako standardno rezervisano sedište, korisnik ostvaruje 20 poena, dok rezervisanjem specijalnih sedišta ostvaruje 40 poena.</p>
+  <h2 style="text-decoration: underline;">Korišćenje poena</h2><br>
+<p>Poeni se koriste isključvo odjednom, osim u slučaju da njihov broj prevazilazi cenu karte! Broj poena možete proveriti na <a th:href="@{/korisnickiProfil}">svom profilu!</a></p>
+<p>U slučaju, da broj poena prevazilazi cenu karte, za izabranu rezervaciju dobijate besplatnu kartu. Ostatak poena možete iskoristiti za rezervaciju koju izaberete.</p>
+  <h2 style="text-decoration: underline;">Napomene:</h2><br>
+<p>Da biste iskoristili poene, potrebno je da potvrdite rezervaciju.</p> 
+<p>Jednom iskorišćeni poeni, ne mogu se vratiti! U slučaju otkazivanja rezervacije, poeni Vam neće biti vraćeni!</p>
+</body>
+<footer th:insert="footer"></footer>
+</html>
