@@ -32,7 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     {
         http
                 .authorizeRequests()
-                .antMatchers("/pocetna", "/error", "/pregledFilmova/**", "/pregledProjekcija/**", "/pregledBioskopa/**", "/static/**", "/images/**").permitAll()
+                .antMatchers("/pocetna", "/error", "/pregledFilmova/**", "/pregledProjekcija/**", "/pregledBioskopa/**", "/static/**", "/images/**", "/usloviKoriscenja/**", "/politikaPrivatnosti/**", "/oNama/**").permitAll()
                 .antMatchers("/administracijaClanova/**", "updateKorisnika/**", "/dodavanjeFilmova/**", "/dodavanjeBioskopa/**", "/novaProjekcija/**", "/pregledBioskopaAdmin/**", "/izmenaBioskopa/**", "/administriranjeClanova/**", "/updateKorisnika/**", "/pregledProjekcijaAdmin/**", "/pregledFilmovaAdmin/**", "/izmenaProjekcija/**", "/otkazivanjeProjekcija/**", "/izmenaFilmova/**","/brisanjeFilmova/**").hasAuthority("ADMIN")
                 .antMatchers("/izborSedista/**","/selektovanaSedista/**", "/mojeRezervacije/**", "/korisnickiProfil/**").hasAuthority("KORISNIK")
                 .antMatchers("/izvestajRezervacija/**").hasAuthority("MENADŽER")

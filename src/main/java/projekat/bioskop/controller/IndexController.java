@@ -12,4 +12,22 @@ public class IndexController
     {
         return "pocetna";
     }
+
+    @RequestMapping("/usloviKoriscenja")
+    public String usloviKoriscenja (Model model)
+    {
+        return "usloviKoriscenja";
+    }
+
+    @RequestMapping("/politikaPrivatnosti")
+    public String politikaPrivatnosti (Model model)
+    {
+        return "politikaPrivatnosti";
+    }
+
+    @RequestMapping("/oNama")
+    public String oNama (Model model)
+    {
+        return "oNama";
+    }
 }

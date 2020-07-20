@@ -24,6 +24,14 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#" th:href="@{~/pocetna}"><i class="fa fa-home"></i>Početna</a>
                     </li>
+                    <li class="nav-item dropdown" >
+                        <a class="nav-link dropdown-toggle" href="#" id="navbardrp" data-toggle="dropdown">Informacije</a>
+                        <div class="dropdown-menu bg-dark">
+                            <a class="dropdown-item nav-link" style="text-align: center" href="#" th:href="@{~/oNama}" onmouseover="this.className='dropdown-item nav-link bg-dark';this.styles = 'color:white';"><i class="fa fa-home"></i>O nama</a>
+                            <a class="dropdown-item nav-link" style="text-align: center" href="#" th:href="@{~/politikaPrivatnosti}" onmouseover="this.className='dropdown-item nav-link bg-dark';this.styles = 'color:white';"><i class="fa fa-home"></i>Politika privatnosti</a>
+                            <a class="dropdown-item nav-link" style="text-align: center" href="#" th:href="@{~/usloviKoriscenja}" onmouseover="this.className='dropdown-item nav-link bg-dark';this.styles = 'color:white';"><i class="fa fa-home"></i>Uslovi korišćenja</a>
+                        </div>
+                    </li>
                     <!-- ADMIN -->
                     <li sec:authorize="hasAuthority('ADMIN')" class="nav-item">
                         <a class="nav-link" href="#" th:href="@{~/administriranjeClanova/korisnici}"><i class="fa fa-home"></i>Pregled korisnika</a>
