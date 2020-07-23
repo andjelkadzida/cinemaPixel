@@ -41,7 +41,7 @@ public class MenadzerController
             rs.getRezervacija().getProjekcija().getFilm().getTrajanje();
             rs.getRezervacija().getProjekcija().getPocetakProjekcije();
             rs.getRezervacija().getProjekcija().getSala().getBrojSale();
-            rs.getSediste().getSedisteId();
+            rs.getSediste().getBrojSedista();
             model.addAttribute("rezervisanaSedistaSet", rezervisanaSedistaSet);
         }
         for(Rezervacija r: rezervacijas)
