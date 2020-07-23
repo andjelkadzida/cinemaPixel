@@ -40,7 +40,7 @@
                 <td  style="text-align: center; vertical-align: middle;" th:text="${#temporals.format(rezervisanoSediste.getRezervacija().getProjekcija().getPocetakProjekcije().toLocalTime(), 'HH:mm') + 'h'}"></td>
                 <td  style="text-align: center; vertical-align: middle;" th:text="${#temporals.format(rezervisanoSediste.getRezervacija().getProjekcija().getKrajProjekcije().toLocalTime(), 'HH:mm') + 'h'}"></td>
                 <td  style="text-align: center; vertical-align: middle;" th:text="${rezervisanoSediste.getRezervacija().getProjekcija().getSala().getBrojSale()}"></td>
-                <td  style="text-align: center; vertical-align: middle;" th:text="${rezervisanoSediste.getSediste().getSedisteId()}"></td>
+                <td  style="text-align: center; vertical-align: middle;" th:text="${rezervisanoSediste.getSediste().getBrojSedista()}"></td>
                 <div th:if="${rezervisanoSediste.getCenaKarte()==0}">
                     <td  style="text-align: center; vertical-align: middle;">Ulaz besplatan!</td>
                 </div>

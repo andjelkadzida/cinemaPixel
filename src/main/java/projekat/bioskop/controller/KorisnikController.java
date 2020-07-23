@@ -47,6 +47,7 @@ public class KorisnikController
                 rs.getRezervacija().getProjekcija().getPocetakProjekcije();
                 rs.getRezervacija().getProjekcija().getSala().getBrojSale();
                 rs.getSediste().getSedisteId();
+                rs.getSediste().getBrojSedista();
                 model.addAttribute("rezervisanaSedistaSet", rezervisanaSedistaSet);
         }
         return "mojeRezervacije";

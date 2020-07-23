@@ -14,6 +14,8 @@ public class Sediste
     @Column(name = "tipSedista", length = 20, unique = false, nullable = false)
     private String tipSedista;
 
+    @Column(name = "brojSedista", length = 20, unique = false, nullable = false)
+    private int brojSedista;
 
     @ManyToOne
     @JoinColumn(name = "sala_id", nullable = false)
@@ -44,6 +46,16 @@ public class Sediste
     public void setTipSedista(String tipSedista)
     {
         this.tipSedista = tipSedista;
+    }
+
+    public int getBrojSedista()
+    {
+        return brojSedista;
+    }
+
+    public void setBrojSedista(int brojSedista)
+    {
+        this.brojSedista = brojSedista;
     }
 
     public Sala getSala()

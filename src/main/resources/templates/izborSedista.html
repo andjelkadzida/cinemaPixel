@@ -16,17 +16,19 @@
             <!--Nisu clanovi klubova -->
            <div class="wrapper" style=" width: 30%;overflow: hidden;margin: 30px auto 0;">
                <section th:each="sediste:${sedista}" style="width:46%;float:left;margin:0 2%;">
+                   <div th:if="${sediste.getSala().salaId==pr.getSala().salaId}">
                    <div th:if="${sediste.getTipSedista().equals('Standardno')}">
                        <div th:if="${rs.contains(sediste)}">
                            <label style="display:block;padding: 5px 10px;margin: 5px 0;font:14px/20px sans-serif, sans-serif;background-color: #ff6633;border-radius: 7px;" >
-                               <input type="checkbox" name="sediste" th:value="${sediste.getSedisteId()}" th:text="' ' + ${sediste.getSedisteId()}" style="position: relative;top: 1px;" disabled>
+                               <input type="checkbox" name="sediste" th:value="${sediste.getSedisteId()}" th:text="' ' + ${sediste.getBrojSedista()}" style="position: relative;top: 1px;" disabled>
                            </label>
                        </div>
                        <div th:unless="${rs.contains(sediste)}">
                            <label style="display:block;padding: 5px 10px;margin: 5px 0;font: 14px/20px sans-serif, sans-serif;background-color:  #66ffff;border-radius: 7px;" >
-                               <input type="checkbox" name="sediste" th:value="${sediste.getSedisteId()}" th:text="' ' + ${sediste.getSedisteId()}" style="position: relative;top: 1px;">
+                               <input type="checkbox" name="sediste" th:value="${sediste.getSedisteId()}" th:text="' ' + ${sediste.getBrojSedista()}" style="position: relative;top: 1px;">
                            </label>
                        </div>
+                   </div>
                    </div>
                </section>
            </div>
@@ -34,17 +36,19 @@
             <div class="wrapper" style=" width: 30%;overflow: hidden;margin: 30px auto 0;">
                 <div th:if="${korisnik==true}">
                 <section th:each="sediste:${sedista}" style="width:46%;float:left;margin:0 2%;">
+                    <div th:if="${sediste.getSala().salaId==pr.getSala().salaId}">
                     <div th:if="${sediste.getTipSedista().equals('Specijalno')}">
                         <div th:if="${rs.contains(sediste)}">
-                            <label style="display:block;padding: 5px 10px;margin: 5px 0;font:14px/20px sans-serif, sans-serif;background-color: #e63900;border-radius: 7px;" >
-                                <input type="checkbox" name="sediste" th:value="${sediste.getSedisteId()}" th:text="' ' + ${sediste.getSedisteId()}" style="position: relative;top: 1px;" disabled>
-                            </label>
+                             <label style="display:block;padding: 5px 10px;margin: 5px 0;font:14px/20px sans-serif, sans-serif;background-color: #e63900;border-radius: 7px;" >
+                                 <input type="checkbox" name="sediste" th:value="${sediste.getSedisteId()}" th:text="' ' + ${sediste.getBrojSedista()}" style="position: relative;top: 1px;" disabled>
+                             </label>
                         </div>
                         <div th:unless="${rs.contains(sediste)}">
                             <label style="display:block;padding: 5px 10px;margin: 5px 0;font: 14px/20px sans-serif, sans-serif;background-color: #cc99ff;border-radius: 7px;" >
-                                <input type="checkbox" name="sediste" th:value="${sediste.getSedisteId()}" th:text="' ' + ${sediste.getSedisteId()}" style="position: relative;top: 1px;">
+                                <input type="checkbox" name="sediste" th:value="${sediste.getSedisteId()}" th:text="' ' + ${sediste.getBrojSedista()}" style="position: relative;top: 1px;">
                             </label>
                         </div>
+                    </div>
                     </div>
                 </section>
                 </div>
