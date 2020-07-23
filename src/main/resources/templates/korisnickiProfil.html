@@ -40,6 +40,12 @@
         <input type="submit" class="btn btn-danger" value="Obrišite profil" style="margin-top: -60px; margin-bottom: 8.5px; margin-left: 250px; border: none; color:white; border-radius: 5px;font-family: 'Open Sans', sans-serif;">
     </form>
 </div>
+<div th:if="${korisnik.getClanKluba()==true}">
+    <img src="../static/images/vip.png"  th:src="@{images/vip.png}" height="550px">
+</div>
+<div th:unless="${korisnik.getClanKluba()==true}">
+    <img src="../static/images/kartica.png"  th:src="@{images/kartica.png}" height="550px">
+</div>
 </body>
-<footer th:insert="footer"></footer>
+<footer class="fixed-bottom" th:insert="footer"></footer>
 </html>
