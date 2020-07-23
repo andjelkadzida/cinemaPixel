@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>projekat</groupId>
-    <artifactId>bioskopas</artifactId>
+    <artifactId>bioskopixel</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>bioskopas</name>
+    <name>bioskopixel</name>
     <description>Bioskop Pixel</description>
     <properties>
         <java.version>1.8</java.version>
