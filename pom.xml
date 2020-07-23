@@ -12,8 +12,7 @@
     <artifactId>bioskopas</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>bioskopas</name>
-    <description>Bioskop "AS"</description>
-
+    <description>Bioskop Pixel</description>
     <properties>
         <java.version>1.8</java.version>
     </properties>
