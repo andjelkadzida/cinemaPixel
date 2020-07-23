@@ -19,7 +19,9 @@
 <div th:fragment="nav">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">AS</a>
+            <a class="navbar-brand" href="#">
+                <img src="../static/images/proba.png" th:src="@{images/proba.png}" height="35">
+            </a>
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="#" th:href="@{~/pocetna}"><i class="fa fa-home"></i>Početna</a>
