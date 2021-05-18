@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class BioskopTest
 {
-
+    String naz = "Pix";
     Bioskop bioskop = new Bioskop(null, "Pixel", "Arsenija Carnojevica 45", "Novi Beograd");
 
     @Test
@@ -29,6 +29,7 @@ class BioskopTest
     @Test
     void setNaziv()
     {
+
     }
 
     @Test
@@ -44,6 +45,7 @@ class BioskopTest
     @Test
     void getGrad()
     {
+        assertEquals(bioskop.getGrad(), "Novi Beograd");
     }
 
     @Test
