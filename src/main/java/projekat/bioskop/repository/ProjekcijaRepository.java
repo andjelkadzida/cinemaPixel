@@ -2,7 +2,6 @@ package projekat.bioskop.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import projekat.bioskop.model.Projekcija;
 import projekat.bioskop.model.Sediste;
 

@@ -5,9 +5,6 @@ import org.springframework.data.jpa.repository.Query;
 import projekat.bioskop.model.RezervisanaSedista;
 import projekat.bioskop.model.Sediste;
 
-import java.util.Set;
-
-
 public interface RezervisanaSedistaRepository extends JpaRepository<RezervisanaSedista, Long>
 {
     @Query("select s from Sediste s where s.sedisteId=?1")
