@@ -14,29 +14,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import projekat.bioskop.model.Film;
+import projekat.bioskop.repository.FilmRepository;
 
-import projekat.bioskop.model.Sala;
-import projekat.bioskop.repository.SalaRepository;
-
-@ContextConfiguration(classes = {SalaService.class})
+@ContextConfiguration(classes = {FilmService.class})
 @ExtendWith(SpringExtension.class)
-public class SalaServiceTest
+public class FilmServiceTest
 {
     @MockBean
-    private SalaRepository salaRepository;
+    private FilmRepository filmRepository;
 
     @Autowired
-    private SalaService salaService;
+    private FilmService filmService;
 
     @Test
-    public void testSveSale()
+    public void testSviFilmovi()
     {
-        ArrayList<Sala> salaList = new ArrayList<Sala>();
-        when(this.salaRepository.findAll()).thenReturn(salaList);
-        List<Sala> actualSveSaleResult = this.salaService.sveSale();
-        assertSame(salaList, actualSveSaleResult);
-        assertTrue(actualSveSaleResult.isEmpty());
-        verify(this.salaRepository).findAll();
+        ArrayList<Film> filmList = new ArrayList<Film>();
+        when(this.filmRepository.findAll()).thenReturn(filmList);
+        List<Film> actualSviFilmoviResult = this.filmService.sviFilmovi();
+        assertSame(filmList, actualSviFilmoviResult);
+        assertTrue(actualSviFilmoviResult.isEmpty());
+        verify(this.filmRepository).findAll();
     }
 }
 
