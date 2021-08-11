@@ -1,65 +1,56 @@
 package projekat.bioskop.model;
 
+import java.util.HashSet;
+
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 class BioskopTest
 {
-    String naz = "Pix";
-    Bioskop bioskop = new Bioskop(null, "Pixel", "Arsenija Carnojevica 45", "Novi Beograd");
-
     @Test
-    void getBioskopId()
+    public void testConstructor()
     {
-        assertNull(bioskop.getBioskopId());
+        Bioskop actualBioskop = new Bioskop();
+        actualBioskop.setAdresa("Arsenija Carnojevica 45");
+        actualBioskop.setBioskopId(234L);
+        actualBioskop.setGrad("Novi Beograd");
+        actualBioskop.setNaziv("Pixel");
+        HashSet<Sala> salaSet = new HashSet<Sala>();
+        actualBioskop.setSale(salaSet);
+        assertEquals("Arsenija Carnojevica 45", actualBioskop.getAdresa());
+        assertEquals(234L, actualBioskop.getBioskopId().longValue());
+        assertEquals("Novi Beograd", actualBioskop.getGrad());
+        assertEquals("Pixel", actualBioskop.getNaziv());
+        assertSame(salaSet, actualBioskop.getSale());
     }
 
     @Test
-    void setBioskopId()
+    public void testConstructor2()
     {
+        Bioskop actualBioskop = new Bioskop(234L, "Pixel", "Arsenija Carnojevica 45", "Novi Beograd");
+        actualBioskop.setAdresa("Arsenija Carnojevica 45");
+        actualBioskop.setBioskopId(234L);
+        actualBioskop.setGrad("Novi Beograd");
+        actualBioskop.setNaziv("Pixel");
+        HashSet<Sala> salaSet = new HashSet<Sala>();
+        actualBioskop.setSale(salaSet);
+        assertEquals("Arsenija Carnojevica 45", actualBioskop.getAdresa());
+        assertEquals(234L, actualBioskop.getBioskopId().longValue());
+        assertEquals("Novi Beograd", actualBioskop.getGrad());
+        assertEquals("Pixel", actualBioskop.getNaziv());
+        assertSame(salaSet, actualBioskop.getSale());
     }
 
     @Test
-    void getNaziv()
+    public void testConstructor3()
     {
-        assertEquals(bioskop.getNaziv(), "Pixel");
+        Bioskop actualBioskop = new Bioskop();
+        HashSet<Sala> salaSet = new HashSet<Sala>();
+        actualBioskop.setSale(salaSet);
+        assertSame(salaSet, actualBioskop.getSale());
     }
 
-    @Test
-    void setNaziv()
-    {
-
-    }
-
-    @Test
-    void getAdresa()
-    {
-    }
-
-    @Test
-    void setAdresa()
-    {
-    }
-
-    @Test
-    void getGrad()
-    {
-        assertEquals(bioskop.getGrad(), "Novi Beograd");
-    }
-
-    @Test
-    void setGrad()
-    {
-    }
-
-    @Test
-    void getSale()
-    {
-    }
-
-    @Test
-    void setSale()
-    {
-    }
 }
