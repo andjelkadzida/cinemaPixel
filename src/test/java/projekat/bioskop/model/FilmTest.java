@@ -1,93 +1,58 @@
 package projekat.bioskop.model;
 
+import java.util.HashSet;
+
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 class FilmTest
 {
-    Film film = new Film(5l,"Maratonci trce pocasni krug","Komedija","3D",120,"Dobra stara komedija...","dsadsaasd");
-
-
     @Test
-    void getFilmId()
+    public void testConstructor()
     {
-        assertEquals(film.getFilmId(), 5l);
+        Film actualFilm = new Film();
+        actualFilm.setFilmId(5l);
+        actualFilm.setNazivFilma("Maratonci trce pocasni krug");
+        actualFilm.setOpis("https://www.imdb.com/title/tt0084302/?ref_=nv_sr_srsg_0");
+        HashSet<Projekcija> projekcijaSet = new HashSet<Projekcija>();
+        actualFilm.setProjekcije(projekcijaSet);
+        actualFilm.setTehnologija("2D");
+        actualFilm.setTrailer("https://www.youtube.com/embed/r9qP5g5ymko");
+        actualFilm.setTrajanje(1);
+        actualFilm.setZanr("Komedija");
+        assertEquals(5l, actualFilm.getFilmId().longValue());
+        assertEquals("Maratonci trce pocasni krug", actualFilm.getNazivFilma());
+        assertEquals("https://www.imdb.com/title/tt0084302/?ref_=nv_sr_srsg_0", actualFilm.getOpis());
+        assertSame(projekcijaSet, actualFilm.getProjekcije());
+        assertEquals("2D", actualFilm.getTehnologija());
+        assertEquals("https://www.youtube.com/embed/r9qP5g5ymko", actualFilm.getTrailer());
+        assertEquals(1, actualFilm.getTrajanje());
+        assertEquals("Komedija", actualFilm.getZanr());
     }
 
     @Test
-    void getProjekcije()
+    public void testConstructor2()
     {
-    }
-
-    @Test
-    void setProjekcije()
-    {
-    }
-
-    @Test
-    void setFilmId()
-    {
-    }
-
-    @Test
-    void getNazivFilma()
-    {
-
-    }
-
-    @Test
-    void setNazivFilma()
-    {
-    }
-
-    @Test
-    void getZanr()
-    {
-    }
-
-    @Test
-    void setZanr()
-    {
-    }
-
-    @Test
-    void getTehnologija()
-    {
-    }
-
-    @Test
-    void setTehnologija()
-    {
-    }
-
-    @Test
-    void getTrajanje()
-    {
-    }
-
-    @Test
-    void setTrajanje()
-    {
-    }
-
-    @Test
-    void getOpis()
-    {
-    }
-
-    @Test
-    void setOpis()
-    {
-    }
-
-    @Test
-    void getTrailer()
-    {
-    }
-
-    @Test
-    void setTrailer()
-    {
+        Film actualFilm = new Film(5l, "Maratonci trce pocasni krug", "Komedija", "2D", 1, "https://www.imdb.com/title/tt0084302/?ref_=nv_sr_srsg_0", "https://www.youtube.com/embed/r9qP5g5ymko");
+        actualFilm.setFilmId(5l);
+        actualFilm.setNazivFilma("Maratonci trce pocasni krug");
+        actualFilm.setOpis("https://www.imdb.com/title/tt0084302/?ref_=nv_sr_srsg_0");
+        HashSet<Projekcija> projekcijaSet = new HashSet<Projekcija>();
+        actualFilm.setProjekcije(projekcijaSet);
+        actualFilm.setTehnologija("2D");
+        actualFilm.setTrailer("https://www.youtube.com/embed/r9qP5g5ymko");
+        actualFilm.setTrajanje(1);
+        actualFilm.setZanr("Komedija");
+        assertEquals(5l, actualFilm.getFilmId().longValue());
+        assertEquals("Maratonci trce pocasni krug", actualFilm.getNazivFilma());
+        assertEquals("https://www.imdb.com/title/tt0084302/?ref_=nv_sr_srsg_0", actualFilm.getOpis());
+        assertSame(projekcijaSet, actualFilm.getProjekcije());
+        assertEquals("2D", actualFilm.getTehnologija());
+        assertEquals("https://www.youtube.com/embed/r9qP5g5ymko", actualFilm.getTrailer());
+        assertEquals(1, actualFilm.getTrajanje());
+        assertEquals("Komedija", actualFilm.getZanr());
     }
 }
