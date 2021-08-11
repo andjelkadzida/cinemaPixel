@@ -1,13 +1,5 @@
 package projekat.bioskop.model;
-
-
-import org.apache.tomcat.jni.Local;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.*;
-import java.sql.Date;
-import java.sql.Time;
-import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.Set;
 
