@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
 class FilmTest
@@ -56,20 +55,5 @@ class FilmTest
         assertEquals("https://www.youtube.com/embed/r9qP5g5ymko", actualFilm.getTrailer());
         assertEquals(1, actualFilm.getTrajanje());
         assertEquals("Komedija", actualFilm.getZanr());
-    }
-
-    @Test
-    public void testConstructor3()
-    {
-        Film actualFilm = new Film(123L, "Naziv Filma", "Zanr", "Tehnologija", 1, "Opis", "Trailer");
-
-        assertEquals(123L, actualFilm.getFilmId().longValue());
-        assertEquals("Zanr", actualFilm.getZanr());
-        assertEquals(1, actualFilm.getTrajanje());
-        assertEquals("Trailer", actualFilm.getTrailer());
-        assertEquals("Tehnologija", actualFilm.getTehnologija());
-        assertNull(actualFilm.getProjekcije());
-        assertEquals("Opis", actualFilm.getOpis());
-        assertEquals("Naziv Filma", actualFilm.getNazivFilma());
     }
 }
