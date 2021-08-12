@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 class BioskopTest
 {
     @Test
-    public void testConstructor()
+    public void testBioskop()
     {
         Bioskop bioskop = new Bioskop();
         Bioskop actualBioskop = new Bioskop(234L, "Pixel", "Arsenija Carnojevica 45", "Novi Beograd");

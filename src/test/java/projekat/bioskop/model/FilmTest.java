@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 class FilmTest
 {
     @Test
-    public void testConstructor()
+    public void testFilm()
     {
         Film actualFilm = new Film(5l, "Maratonci trce pocasni krug", "Komedija", "2D", 1, "https://www.imdb.com/title/tt0084302/?ref_=nv_sr_srsg_0", "https://www.youtube.com/embed/r9qP5g5ymko");
         actualFilm.setFilmId(5l);

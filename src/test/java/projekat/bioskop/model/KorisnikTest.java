@@ -27,9 +27,11 @@ public class KorisnikTest
     }
 
     @Test
-    public void testConstructor()
+    public void testKorisnik()
     {
         Korisnik actualKorisnik = new Korisnik();
+        Korisnik korisnik = new Korisnik(123L, "Andjelka", "Dzida", "andjelkadzida@gmail.com", "Andjelka123", "KORISNIK", 12,
+                true);
         actualKorisnik.setClanKluba(true);
         actualKorisnik.setEmail("andjelkadzida@gmail.com");
         actualKorisnik.setIme("Andjelka");
@@ -47,22 +49,6 @@ public class KorisnikTest
         assertSame(rezervacijaSet, actualKorisnik.getRezervacije());
         assertEquals("Andjelka123", actualKorisnik.getSifra());
         assertEquals("KORISNIK", actualKorisnik.getTipKorisnika());
-    }
-
-    @Test
-    public void testConstructor2()
-    {
-        Korisnik actualKorisnik = new Korisnik(123L, "Andjelka", "Dzida", "andjelkadzida@gmail.com", "Andjelka123", "KORISNIK", 12,
-                true);
-
-        assertTrue(actualKorisnik.getClanKluba());
-        assertEquals("KORISNIK", actualKorisnik.getTipKorisnika());
-        assertEquals("Andjelka123", actualKorisnik.getSifra());
-        assertEquals("Dzida", actualKorisnik.getPrezime());
-        assertEquals(12, actualKorisnik.getPoeni());
-        assertEquals(123L, actualKorisnik.getKorisnikId().longValue());
-        assertEquals("Andjelka", actualKorisnik.getIme());
-        assertEquals("andjelkadzida@gmail.com", actualKorisnik.getEmail());
     }
 }
 
