@@ -1,15 +1,18 @@
 package projekat.bioskop.controller;
 
+import java.time.LocalDateTime;
 import java.util.*;
 import javax.mail.*;
 
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.security.core.parameters.P;
 import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -18,6 +21,8 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import projekat.bioskop.model.*;
 import projekat.bioskop.repository.*;
 import projekat.bioskop.services.FilmService;
@@ -25,6 +30,7 @@ import projekat.bioskop.services.SalaService;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 @ContextConfiguration(classes = {ProjekcijaController.class})
 @ExtendWith(SpringExtension.class)
@@ -58,14 +64,39 @@ class ProjekcijaControllerTest
     private SedisteRepository sedisteRepository;
 
     @MockBean
+    private Sala sala;
+
+    @MockBean
     private FilmRepository filmRepository;
     @MockBean
     private SalaRepository salaRepository;
 
     @Test
+    public void novaProjekcijaTest() throws Exception
+    {
+        final StandaloneMvcTestViewResolver viewResolver = new StandaloneMvcTestViewResolver();
+
+        when(this.filmService.sviFilmovi()).thenReturn(new ArrayList<>());
+        when(this.salaService.sveSale()).thenReturn(new ArrayList<>());
+
+        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/novaProjekcija");
+        MockMvcBuilders.standaloneSetup(this.projekcijaController)
+                .setViewResolvers(viewResolver)
+                .build()
+                .perform(requestBuilder)
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.model().size(2))
+                .andExpect(MockMvcResultMatchers.model().attributeExists("film", "sala"))
+                .andExpect(MockMvcResultMatchers.view().name("novaProjekcija"))
+                .andExpect(MockMvcResultMatchers.forwardedUrl("novaProjekcija"));
+    }
+
+
+    @Test
     public void pregledProjekcijaAdminTest() throws Exception
     {
         when(this.projekcijaRepository.projekcijaPoFilmu(anyString())).thenReturn(new HashSet<Projekcija>());
+
         MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/pregledProjekcijaAdmin/{film}", "Film");
         MockMvcBuilders.standaloneSetup(this.projekcijaController)
                 .build()
@@ -77,28 +108,31 @@ class ProjekcijaControllerTest
                 .andExpect(MockMvcResultMatchers.forwardedUrl("pregledProjekcijaAdmin"));
     }
 
-    // Ovde je problem kada je ista ruta i view koji se vraca za ono circular inace radi
-//    @Test
-//    public void pregledFilmovaAdminTest() throws Exception
-//    {
-//        when(this.filmService.sviFilmovi()).thenReturn(new ArrayList<Film>());
-//        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/pregledFilmovaAdmina");
-//        MockMvcBuilders.standaloneSetup(this.projekcijaController)
-//                .build()
-//                .perform(requestBuilder)
-//                .andExpect(MockMvcResultMatchers.status().isOk())
-//                .andExpect(MockMvcResultMatchers.model().size(1))
-//                .andExpect(MockMvcResultMatchers.model().attributeExists("film"))
-//                .andExpect(MockMvcResultMatchers.view().name("pregledFilmovaAdmin"))
-//                .andExpect(MockMvcResultMatchers.forwardedUrl("pregledFilmovaAdmin"));
-//    }
+    @Test
+    public void pregledFilmovaAdminTest() throws Exception
+    {
+        final StandaloneMvcTestViewResolver viewResolver = new StandaloneMvcTestViewResolver();
 
+        when(this.filmService.sviFilmovi()).thenReturn(new ArrayList<Film>());
+
+        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/pregledFilmovaAdmin");
+        MockMvcBuilders.standaloneSetup(this.projekcijaController)
+                .setViewResolvers(viewResolver)
+                .build()
+                .perform(requestBuilder)
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.model().size(1))
+                .andExpect(MockMvcResultMatchers.model().attributeExists("film"))
+                .andExpect(MockMvcResultMatchers.view().name("pregledFilmovaAdmin"))
+                .andExpect(MockMvcResultMatchers.forwardedUrl("pregledFilmovaAdmin"));
+    }
 
     @Test
     public void izmenaProjekcijaViewTest() throws Exception
     {
         when(this.projekcijaRepository.getOne(anyLong())).thenReturn(new Projekcija());
         when(this.salaService.sveSale()).thenReturn(new ArrayList<>());
+
         MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/izmenaProjekcija/{projekcijaId}", 1);
         MockMvcBuilders.standaloneSetup(this.projekcijaController)
                 .build()
