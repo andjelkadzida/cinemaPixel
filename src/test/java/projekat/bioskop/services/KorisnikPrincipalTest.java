@@ -12,6 +12,7 @@ public class KorisnikPrincipalTest
     @Test
     public void testKorisnikPrincipal()
     {
+        //Testiranje korisnickog naloga
         assertTrue((new KorisnikPrincipal(new Korisnik())).isAccountNonExpired());
         assertTrue((new KorisnikPrincipal(new Korisnik())).isAccountNonLocked());
         assertTrue((new KorisnikPrincipal(new Korisnik())).isCredentialsNonExpired());
