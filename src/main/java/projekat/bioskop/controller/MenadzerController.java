@@ -12,7 +12,6 @@ import projekat.bioskop.repository.RezervisanaSedistaRepository;
 import java.time.LocalDateTime;
 import java.util.List;
 
-//Kontoler Menadzer
 @Controller
 public class MenadzerController
 {
