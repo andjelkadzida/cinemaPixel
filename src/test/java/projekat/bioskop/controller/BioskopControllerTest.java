@@ -5,6 +5,7 @@ import static org.mockito.Mockito.anyString;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -40,11 +41,26 @@ import projekat.bioskop.repository.SedisteRepository;
 @ExtendWith(SpringExtension.class)
 public class BioskopControllerTest
 {
-    @Autowired
-    private BioskopController bioskopController;
+    @MockBean
+    private ProjekcijaRepository projekcijaRepository;
 
     @MockBean
-    private BioskopRepository bioskopRepository;
+    private RezervacijaRepository rezervacijaRepository;
+
+    @MockBean
+    private RezervisanaSedistaRepository rezervisanaSedistaRepository;
+
+    @MockBean
+    private SedisteRepository sedisteRepository;
+
+    @Autowired
+    BioskopController bioskopController;
+
+    @MockBean
+    BioskopRepository bioskopRepository;
+
+    @MockBean
+    SalaRepository salaRepository;
 
     @Test
     public void testDodavanjeNovogBioskopa() throws Exception
@@ -132,6 +148,40 @@ public class BioskopControllerTest
                 .andExpect(MockMvcResultMatchers.model().attributeExists("bioskop"))
                 .andExpect(MockMvcResultMatchers.view().name("noviBioskop"))
                 .andExpect(MockMvcResultMatchers.forwardedUrl("noviBioskop"));
+    }
+
+    @Test
+    public void testPregledBioskopa() throws Exception
+    {
+        final StandaloneMvcTestViewResolver viewResolver = new StandaloneMvcTestViewResolver();
+        when(this.bioskopRepository.findAll()).thenReturn(new ArrayList<Bioskop>());
+        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/pregledBioskopa");
+        MockMvcBuilders.standaloneSetup(this.bioskopController)
+                .setViewResolvers(viewResolver)
+                .build()
+                .perform(requestBuilder)
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.model().size(1))
+                .andExpect(MockMvcResultMatchers.model().attributeExists("bioskop"))
+                .andExpect(MockMvcResultMatchers.view().name("pregledBioskopa"))
+                .andExpect(MockMvcResultMatchers.forwardedUrl("pregledBioskopa"));
+    }
+
+    @Test
+    public void testPregledBioskopaAdmin() throws Exception
+    {
+        final StandaloneMvcTestViewResolver viewResolver = new StandaloneMvcTestViewResolver();
+        when(this.bioskopRepository.findAll()).thenReturn(new ArrayList<Bioskop>());
+        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/pregledBioskopaAdmin");
+        MockMvcBuilders.standaloneSetup(this.bioskopController)
+                .setViewResolvers(viewResolver)
+                .build()
+                .perform(requestBuilder)
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.model().size(1))
+                .andExpect(MockMvcResultMatchers.model().attributeExists("bioskop"))
+                .andExpect(MockMvcResultMatchers.view().name("pregledBioskopaAdmin"))
+                .andExpect(MockMvcResultMatchers.forwardedUrl("pregledBioskopaAdmin"));
     }
 }
 
