@@ -146,31 +146,12 @@ public class FilmControllerTest {
     }
 
     @Test
-    public void testSpisakFilmova() throws Exception {
+    public void testSpisakFilmova() throws Exception
+    {
         final StandaloneMvcTestViewResolver viewResolver = new StandaloneMvcTestViewResolver();
 
         when(this.filmService.sviFilmovi()).thenReturn(new ArrayList<>());
-
-public class FilmControllerTest
-{
-
-    @Autowired
-    FilmController filmController;
-    @MockBean
-    FilmService filmService;
-    @MockBean
-    ProjekcijaRepository projekcijaRepository;
-    @MockBean
-    KorisnikRepository korisnikRepository;
-    @MockBean
-    RezervacijaRepository rezervacijaRepository;
-    @MockBean
-    SedisteRepository sedisteRepository;
-    @MockBean
-    RezervisanaSedistaRepository rezervisanaSedistaRepository;
-    @MockBean
-    private JavaMailSender javaMailSender;
-
+    }
     @Test
     public void spisakFilmovaTest() throws Exception
     {
@@ -221,6 +202,7 @@ public class FilmControllerTest
         final StandaloneMvcTestViewResolver viewResolver = new StandaloneMvcTestViewResolver();
 
         MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/pregledProjekcija/{film}", "Film");
+        requestBuilder.contentType("Not all who wander are lost");
         MockMvcBuilders.standaloneSetup(this.filmController)
                 .setViewResolvers(viewResolver)
                 .build()
@@ -231,22 +213,6 @@ public class FilmControllerTest
                 .andExpect(MockMvcResultMatchers.view().name("pregledProjekcija"))
                 .andExpect(MockMvcResultMatchers.forwardedUrl("pregledProjekcija"));
     }
-
-    @Test
-    public void testSpisakProjekcija2() throws Exception {
-        when(this.projekcijaRepository.projekcijaPoFilmu(anyString())).thenReturn(new HashSet<Projekcija>());
-        MockHttpServletRequestBuilder getResult = MockMvcRequestBuilders.get("/pregledProjekcija/{film}", "Film");
-        getResult.contentType("Not all who wander are lost");
-        MockMvcBuilders.standaloneSetup(this.filmController)
-                .build()
-                .perform(getResult)
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.model().size(2))
-                .andExpect(MockMvcResultMatchers.model().attributeExists("danas", "projekcija"))
-                .andExpect(MockMvcResultMatchers.view().name("pregledProjekcija"))
-                .andExpect(MockMvcResultMatchers.forwardedUrl("pregledProjekcija"));
-    }
 }
 
 
-}
