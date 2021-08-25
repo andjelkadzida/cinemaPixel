@@ -5,8 +5,6 @@ import java.util.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 import javax.mail.*;
-
-import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -18,7 +16,6 @@ import org.springframework.security.core.parameters.P;
 import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -124,6 +121,7 @@ class ProjekcijaControllerTest {
 
     @Test
     public void pregledProjekcijaAdminTest() throws Exception {
+
         when(this.projekcijaRepository.projekcijaPoFilmu(anyString())).thenReturn(new HashSet<Projekcija>());
 
         MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/pregledProjekcijaAdmin/{film}", "Film");
@@ -139,6 +137,7 @@ class ProjekcijaControllerTest {
 
     @Test
     public void pregledFilmovaAdminTest() throws Exception {
+  
         final StandaloneMvcTestViewResolver viewResolver = new StandaloneMvcTestViewResolver();
 
         when(this.filmService.sviFilmovi()).thenReturn(new ArrayList<Film>());

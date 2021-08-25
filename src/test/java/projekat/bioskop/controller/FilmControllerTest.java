@@ -16,6 +16,11 @@ import javax.mail.NoSuchProviderException;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.URLName;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.when;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashSet;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -29,6 +34,8 @@ import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequ
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -37,6 +44,7 @@ import projekat.bioskop.model.Film;
 import projekat.bioskop.model.Korisnik;
 import projekat.bioskop.model.Projekcija;
 import projekat.bioskop.model.Sediste;
+import projekat.bioskop.model.Projekcija;
 import projekat.bioskop.repository.KorisnikRepository;
 import projekat.bioskop.repository.ProjekcijaRepository;
 import projekat.bioskop.repository.RezervacijaRepository;
@@ -143,6 +151,32 @@ public class FilmControllerTest {
 
         when(this.filmService.sviFilmovi()).thenReturn(new ArrayList<>());
 
+public class FilmControllerTest
+{
+
+    @Autowired
+    FilmController filmController;
+    @MockBean
+    FilmService filmService;
+    @MockBean
+    ProjekcijaRepository projekcijaRepository;
+    @MockBean
+    KorisnikRepository korisnikRepository;
+    @MockBean
+    RezervacijaRepository rezervacijaRepository;
+    @MockBean
+    SedisteRepository sedisteRepository;
+    @MockBean
+    RezervisanaSedistaRepository rezervisanaSedistaRepository;
+    @MockBean
+    private JavaMailSender javaMailSender;
+
+    @Test
+    public void spisakFilmovaTest() throws Exception
+    {
+        when(this.filmService.sviFilmovi()).thenReturn(new ArrayList<Film>());
+        final StandaloneMvcTestViewResolver viewResolver = new StandaloneMvcTestViewResolver();
+
         MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/pregledFilmova");
         MockMvcBuilders.standaloneSetup(this.filmController)
                 .setViewResolvers(viewResolver)
@@ -177,11 +211,18 @@ public class FilmControllerTest {
 //                .andExpect(MockMvcResultMatchers.forwardedUrl("izborSedista"));
 //    }
 
+  
     @Test
-    public void testSpisakProjekcija() throws Exception {
+    public void spisakProjekcijaTest() throws Exception
+    {
         when(this.projekcijaRepository.projekcijaPoFilmu(anyString())).thenReturn(new HashSet<Projekcija>());
+        LocalDateTime danas = LocalDateTime.now();
+
+        final StandaloneMvcTestViewResolver viewResolver = new StandaloneMvcTestViewResolver();
+
         MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/pregledProjekcija/{film}", "Film");
         MockMvcBuilders.standaloneSetup(this.filmController)
+                .setViewResolvers(viewResolver)
                 .build()
                 .perform(requestBuilder)
                 .andExpect(MockMvcResultMatchers.status().isOk())
@@ -207,3 +248,5 @@ public class FilmControllerTest {
     }
 }
 
+
+}
