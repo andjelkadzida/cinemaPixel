@@ -33,8 +33,8 @@ public class MenadzerController
         for(RezervisanaSedista rs: rezervisanaSedistaSet)
         {
             zarada+=rs.getCenaKarte();
-            model.addAttribute("rezervisanaSedistaSet", rezervisanaSedistaSet);
         }
+        model.addAttribute("rezervisanaSedistaSet", rezervisanaSedistaSet);
         for(Rezervacija r: rezervacijas)
         {
             if(r.getPotvrdjena()==null)
