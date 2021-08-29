@@ -33,14 +33,6 @@ public class MenadzerController
         for(RezervisanaSedista rs: rezervisanaSedistaSet)
         {
             zarada+=rs.getCenaKarte();
-            rs.getRezervacija().getProjekcija().getSala().getBioskop().getGrad();
-            rs.getRezervacija().getProjekcija().getFilm().getNazivFilma();
-            rs.getRezervacija().getProjekcija().getFilm().getZanr();
-            rs.getRezervacija().getProjekcija().getFilm().getTehnologija();
-            rs.getRezervacija().getProjekcija().getFilm().getTrajanje();
-            rs.getRezervacija().getProjekcija().getPocetakProjekcije();
-            rs.getRezervacija().getProjekcija().getSala().getBrojSale();
-            rs.getSediste().getBrojSedista();
             model.addAttribute("rezervisanaSedistaSet", rezervisanaSedistaSet);
         }
         for(Rezervacija r: rezervacijas)
@@ -57,20 +49,13 @@ public class MenadzerController
             {
                 otkazane++;
             }
-            r.getProjekcija().getSala().getBioskop().getGrad();
-            r.getProjekcija().getFilm().getNazivFilma();
-            r.getProjekcija().getFilm().getZanr();
-            r.getProjekcija().getFilm().getTehnologija();
-            r.getProjekcija().getFilm().getTrajanje();
-            r.getProjekcija().getPocetakProjekcije();
-            r.getProjekcija().getSala().getBrojSale();
-            model.addAttribute("rezervacijas", rezervacijas);
             model.addAttribute("otkazane", otkazane);
             model.addAttribute("potvrdjene", potvrdjene);
             model.addAttribute("bezStatusa", bezStatusa);
             model.addAttribute("zarada", zarada);
-            model.addAttribute("datum", datum);
         }
+        model.addAttribute("rezervacijas", rezervacijas);
+        model.addAttribute("datum", datum);
         return "izvestajRezervacija";
     }
 }
