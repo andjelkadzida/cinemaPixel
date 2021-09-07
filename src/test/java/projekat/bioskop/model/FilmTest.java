@@ -12,6 +12,7 @@ class FilmTest
     @Test
     public void testFilm()
     {
+        Film film = new Film();
         Film actualFilm = new Film(7L, "Countdown", "Horor, Triler", "2D", 90, "https://www.imdb.com/title/tt10039344/?ref_=wl_li_tt", "https://www.youtube.com/embed/TZsgNH17_X4");
         actualFilm.setFilmId(7L);
         actualFilm.setNazivFilma("Countdown");
