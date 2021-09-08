@@ -39,16 +39,7 @@ public class KorisnikController
         Set<RezervisanaSedista> rezervisanaSedistaSet = rezervacijaRepository.nadjiPoEmailu(authentication.getName());
         for(RezervisanaSedista rs: rezervisanaSedistaSet)
         {
-                rs.getRezervacija().getProjekcija().getSala().getBioskop().getGrad();
-                rs.getRezervacija().getProjekcija().getFilm().getNazivFilma();
-                rs.getRezervacija().getProjekcija().getFilm().getZanr();
-                rs.getRezervacija().getProjekcija().getFilm().getTehnologija();
-                rs.getRezervacija().getProjekcija().getFilm().getTrajanje();
-                rs.getRezervacija().getProjekcija().getPocetakProjekcije();
-                rs.getRezervacija().getProjekcija().getSala().getBrojSale();
-                rs.getSediste().getSedisteId();
-                rs.getSediste().getBrojSedista();
-                model.addAttribute("rezervisanaSedistaSet", rezervisanaSedistaSet);
+           model.addAttribute("rezervisanaSedistaSet", rezervisanaSedistaSet);
         }
         return "mojeRezervacije";
     }
