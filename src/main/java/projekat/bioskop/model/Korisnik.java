@@ -1,6 +1,6 @@
 package projekat.bioskop.model;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.Set;
 
 @Entity
@@ -121,9 +121,7 @@ public class Korisnik
         this.rezervacije = rezervacije;
     }
 
-    public Korisnik()
-    {
-    }
+    public Korisnik() {}
 
     public Korisnik(Long korisnikId, String ime, String prezime, String email, String sifra, String tipKorisnika, int poeni, boolean clanKluba)
     {
@@ -136,5 +134,4 @@ public class Korisnik
         this.poeni = poeni;
         this.clanKluba = clanKluba;
     }
-
 }

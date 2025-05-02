@@ -1,49 +1,33 @@
 package projekat.bioskop.controller;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.ArgumentMatchers.anyLong;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.anyString;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Properties;
-import javax.mail.NoSuchProviderException;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.URLName;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.when;
+import jakarta.mail.NoSuchProviderException;
+import jakarta.mail.Session;
+import jakarta.mail.Transport;
+import jakarta.mail.URLName;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashSet;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.mail.javamail.ConfigurableMimeFileTypeMap;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.ResultActions;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import projekat.bioskop.model.Film;
-import projekat.bioskop.model.Korisnik;
-import projekat.bioskop.model.Projekcija;
-import projekat.bioskop.model.Sediste;
 import projekat.bioskop.model.Projekcija;
 import projekat.bioskop.repository.KorisnikRepository;
 import projekat.bioskop.repository.ProjekcijaRepository;
@@ -58,25 +42,25 @@ public class FilmControllerTest {
     @Autowired
     private FilmController filmController;
 
-    @MockBean
+    @MockitoBean
     private FilmService filmService;
 
-    @MockBean
+    @MockitoBean
     private JavaMailSender javaMailSender;
 
-    @MockBean
+    @MockitoBean
     private KorisnikRepository korisnikRepository;
 
-    @MockBean
+    @MockitoBean
     private ProjekcijaRepository projekcijaRepository;
 
-    @MockBean
+    @MockitoBean
     private RezervacijaRepository rezervacijaRepository;
 
-    @MockBean
+    @MockitoBean
     private RezervisanaSedistaRepository rezervisanaSedistaRepository;
 
-    @MockBean
+    @MockitoBean
     private SedisteRepository sedisteRepository;
 
     @Test
@@ -90,12 +74,12 @@ public class FilmControllerTest {
         assertNull(actualFilmController.projekcijaRepository);
         assertNull(actualFilmController.korisnikRepository);
         JavaMailSender javaMailSender = actualFilmController.javaMailSender;
-        assertTrue(javaMailSender instanceof JavaMailSenderImpl);
+        assertInstanceOf(JavaMailSenderImpl.class, javaMailSender);
         assertNull(((JavaMailSenderImpl) javaMailSender).getDefaultEncoding());
         assertNull(((JavaMailSenderImpl) javaMailSender).getUsername());
         assertNull(((JavaMailSenderImpl) javaMailSender).getProtocol());
-        assertTrue(((JavaMailSenderImpl) javaMailSender)
-                .getDefaultFileTypeMap() instanceof org.springframework.mail.javamail.ConfigurableMimeFileTypeMap);
+        assertInstanceOf(ConfigurableMimeFileTypeMap.class, ((JavaMailSenderImpl) javaMailSender)
+                .getDefaultFileTypeMap());
         Properties javaMailProperties = ((JavaMailSenderImpl) javaMailSender).getJavaMailProperties();
         assertTrue(javaMailProperties.isEmpty());
         assertNull(((JavaMailSenderImpl) javaMailSender).getPassword());
@@ -170,29 +154,6 @@ public class FilmControllerTest {
                 .andExpect(MockMvcResultMatchers.forwardedUrl("pregledFilmova"));
     }
 
-//    @Test
-//    public void testIzaberiSedista() throws Exception {
-//        final StandaloneMvcTestViewResolver viewResolver = new StandaloneMvcTestViewResolver();
-//
-//        when(this.korisnikRepository.findByEmail(anyString())).thenReturn(new Korisnik());
-//        when(this.sedisteRepository.pronadjiSva()).thenReturn(new HashSet<Sediste>());
-//        when(this.projekcijaRepository.getOne(anyLong())).thenReturn(new Projekcija());
-//        when(this.projekcijaRepository.nadjiSva(anyLong())).thenReturn(new HashSet<>());
-//
-//        MockHttpServletRequestBuilder postResult = MockMvcRequestBuilders.post("/izborSedista");
-//        MockHttpServletRequestBuilder requestBuilder = postResult.param("projekcijaId", String.valueOf(1L));
-//        MockMvcBuilders.standaloneSetup(this.filmController)
-//                .setViewResolvers(viewResolver)
-//                .build()
-//                .perform(requestBuilder)
-//                .andExpect(MockMvcResultMatchers.status().isOk())
-//                .andExpect(MockMvcResultMatchers.model().size(5))
-//                .andExpect(MockMvcResultMatchers.model().attributeExists("korisnik", "projekcijaId", "sedista", "pr", "rs"))
-//                .andExpect(MockMvcResultMatchers.view().name("izborSedista"))
-//                .andExpect(MockMvcResultMatchers.forwardedUrl("izborSedista"));
-//    }
-
-  
     @Test
     public void spisakProjekcijaTest() throws Exception
     {
@@ -214,5 +175,3 @@ public class FilmControllerTest {
                 .andExpect(MockMvcResultMatchers.forwardedUrl("pregledProjekcija"));
     }
 }
-
-

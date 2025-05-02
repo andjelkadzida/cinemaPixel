@@ -1,5 +1,6 @@
 package projekat.bioskop.model;
-import javax.persistence.*;
+
+import jakarta.persistence.*;
 import java.util.Set;
 
 @Entity
@@ -14,7 +15,6 @@ public class Rezervacija
     @Column(name = "potvrdjena", unique = false, nullable = true)
     private Boolean potvrdjena;
 
-
     @ManyToOne
     @JoinColumn(name = "korisnik_id", nullable = false)
     private Korisnik korisnik;
@@ -25,7 +25,6 @@ public class Rezervacija
 
     @OneToMany(mappedBy = "rezervacija")
     private Set<RezervisanaSedista> rezervisanaSedista;
-
 
     //Getteri, setteri i konstruktori
     public Long getRezervacijaId()
@@ -73,13 +72,10 @@ public class Rezervacija
         return rezervisanaSedista;
     }
 
+    public Rezervacija() {}
+
     public void setRezervisanaSedista(Set<RezervisanaSedista> rezervisanaSedista)
     {
         this.rezervisanaSedista = rezervisanaSedista;
     }
-
-    public Rezervacija()
-    {
-    }
-
 }

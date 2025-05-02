@@ -1,5 +1,6 @@
 package projekat.bioskop.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +17,7 @@ import projekat.bioskop.repository.ProjekcijaRepository;
 import projekat.bioskop.repository.RezervacijaRepository;
 import projekat.bioskop.repository.RezervisanaSedistaRepository;
 
-import javax.validation.Valid;
+
 import java.util.List;
 import java.util.Set;
 
@@ -31,6 +32,7 @@ public class DodavanjeFilmController
     RezervacijaRepository rezervacijaRepository;
     @Autowired
     RezervisanaSedistaRepository rezervisanaSedistaRepository;
+
     @RequestMapping(value = "/dodavanjeFilmova", method = RequestMethod.GET)
     public ModelAndView noviFilmView()
     {
@@ -40,6 +42,7 @@ public class DodavanjeFilmController
         modelAndView.setViewName("noviFilm");
         return modelAndView;
     }
+
     @RequestMapping(value = "/dodavanjeFilmova", method = RequestMethod.POST)
     public ModelAndView dodavanjeNovogFilma(Film film, BindingResult bindingResult, ModelMap modelMap)
     {
@@ -71,6 +74,7 @@ public class DodavanjeFilmController
         model.addAttribute("film", film);
         return "izmenaFilmova";
     }
+
     @RequestMapping(value = "/izmenaFilmova/{film_id}", method = RequestMethod.POST)
     public String izmenaFilmova(Model model, @PathVariable("film_id") Long film_id, @Valid Film film)
     {
@@ -96,6 +100,7 @@ public class DodavanjeFilmController
             return "redirect:/pregledFilmovaAdmin";
         }
     }
+
     @GetMapping(value = "/brisanjeFilmova/{film_id}")
     public String brisanjeFilmova(@PathVariable("film_id") Long film_id)
     {

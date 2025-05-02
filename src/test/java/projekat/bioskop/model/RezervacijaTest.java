@@ -67,4 +67,3 @@ public class RezervacijaTest
         assertSame(rezervisanaSedistaSet, actualRezervacija.getRezervisanaSedista());
     }
 }
-

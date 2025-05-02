@@ -1,5 +1,5 @@
 package projekat.bioskop.model;
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.Set;
 
 @Entity
@@ -78,9 +78,7 @@ public class Sediste
         this.projekcijeSedista = projekcijeSedista;
     }
 
-    public Sediste()
-    {
-    }
+    public Sediste() {}
 
     public Sediste(Long sedisteId, String tipSedista)
     {
@@ -92,7 +90,6 @@ public class Sediste
     {
         this.sala = sala;
     }
-
 
     public Sediste(Set<Projekcija> projekcijeSedista)
     {
@@ -108,5 +105,4 @@ public class Sediste
     {
         this.rezervisanaSedista = rezervisanaSedista;
     }
-
 }

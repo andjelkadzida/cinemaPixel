@@ -50,4 +50,3 @@ public class LoginControllerTest
                 .andExpect(forwardedUrl("login"));
     }
 }
-

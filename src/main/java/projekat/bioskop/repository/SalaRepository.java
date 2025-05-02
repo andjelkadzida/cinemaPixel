@@ -6,5 +6,4 @@ import projekat.bioskop.model.Sala;
 public interface SalaRepository extends JpaRepository<Sala, Long>
 {
     Sala findBySalaId(Long salaId);
-
 }

@@ -13,7 +13,6 @@ import java.util.Optional;
 @Service
 public class KorisnikService implements IKorisnikService
 {
-
     @Autowired
     KorisnikRepository korisnikRepository;
     @Autowired

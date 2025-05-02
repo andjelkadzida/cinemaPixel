@@ -26,5 +26,4 @@ public interface RezervacijaRepository extends JpaRepository<Rezervacija, Long>
 
     @Query("select rs from RezervisanaSedista rs where rs.rezervacija.rezervacijaId=?1")
     Set<RezervisanaSedista> nadjiPoIdRezervacijeSet(Long rezervacijaId);
-
 }

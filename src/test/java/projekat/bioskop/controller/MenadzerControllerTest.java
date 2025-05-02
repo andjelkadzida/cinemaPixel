@@ -7,17 +7,13 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import projekat.bioskop.model.Rezervacija;
-import projekat.bioskop.model.RezervisanaSedista;
 import projekat.bioskop.repository.RezervacijaRepository;
 import projekat.bioskop.repository.RezervisanaSedistaRepository;
 
@@ -27,10 +23,10 @@ public class MenadzerControllerTest {
     @Autowired
     private MenadzerController menadzerController;
 
-    @MockBean
+    @MockitoBean
     private RezervacijaRepository rezervacijaRepository;
 
-    @MockBean
+    @MockitoBean
     private RezervisanaSedistaRepository rezervisanaSedistaRepository;
 
     @Test
@@ -52,4 +48,3 @@ public class MenadzerControllerTest {
                 .andExpect(MockMvcResultMatchers.forwardedUrl("izvestajRezervacija"));
     }
 }
-

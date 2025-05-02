@@ -1,53 +1,27 @@
 package projekat.bioskop.controller;
 
-import java.time.LocalDateTime;
-import java.util.*;
 import java.util.ArrayList;
 import java.util.HashSet;
-import javax.mail.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
-import org.springframework.security.core.parameters.P;
-import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
-import projekat.bioskop.model.*;
-import projekat.bioskop.model.Bioskop;
 import projekat.bioskop.model.Film;
-import projekat.bioskop.model.Korisnik;
 import projekat.bioskop.model.Projekcija;
-import projekat.bioskop.model.Rezervacija;
-import projekat.bioskop.model.RezervisanaSedista;
 import projekat.bioskop.model.Sala;
-import projekat.bioskop.model.Sediste;
 import projekat.bioskop.repository.*;
-import projekat.bioskop.repository.FilmRepository;
-import projekat.bioskop.repository.ProjekcijaRepository;
-import projekat.bioskop.repository.RezervacijaRepository;
-import projekat.bioskop.repository.RezervisanaSedistaRepository;
-import projekat.bioskop.repository.SalaRepository;
 import projekat.bioskop.services.FilmService;
 import projekat.bioskop.services.SalaService;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.anyString;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 @ContextConfiguration(classes = {ProjekcijaController.class})
 @ExtendWith(SpringExtension.class)
@@ -55,36 +29,36 @@ class ProjekcijaControllerTest {
     @Autowired
     private ProjekcijaController projekcijaController;
 
-    @MockBean
+    @MockitoBean
     private FilmService filmService;
 
-    @MockBean
+    @MockitoBean
     private SalaService salaService;
 
-    @MockBean
+    @MockitoBean
     private JavaMailSender javaMailSender;
 
-    @MockBean
+    @MockitoBean
     private KorisnikRepository korisnikRepository;
 
-    @MockBean
+    @MockitoBean
     private ProjekcijaRepository projekcijaRepository;
 
-    @MockBean
+    @MockitoBean
     private RezervacijaRepository rezervacijaRepository;
 
-    @MockBean
+    @MockitoBean
     private RezervisanaSedistaRepository rezervisanaSedistaRepository;
 
-    @MockBean
+    @MockitoBean
     private SedisteRepository sedisteRepository;
 
-    @MockBean
+    @MockitoBean
     private Sala sala;
 
-    @MockBean
+    @MockitoBean
     private FilmRepository filmRepository;
-    @MockBean
+    @MockitoBean
     private SalaRepository salaRepository;
 
     @Test

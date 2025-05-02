@@ -19,4 +19,3 @@ public class BCryptTest
         this.bCrypt.passwordEncoder();
     }
 }
-

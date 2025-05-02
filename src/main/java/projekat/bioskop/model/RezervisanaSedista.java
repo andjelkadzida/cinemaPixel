@@ -1,6 +1,5 @@
 package projekat.bioskop.model;
-
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "REZERVISANA_SEDISTA")
@@ -63,15 +62,11 @@ public class RezervisanaSedista
         this.cenaKarte = cenaKarte;
     }
 
-    public RezervisanaSedista()
-    {
-    }
-
+    public RezervisanaSedista() {}
 
     public RezervisanaSedista(Rezervacija rezervacija, Sediste sediste)
     {
         this.rezervacija = rezervacija;
         this.sediste = sediste;
     }
-
 }

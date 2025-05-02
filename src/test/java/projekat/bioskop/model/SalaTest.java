@@ -34,4 +34,3 @@ public class SalaTest
         assertSame(sedisteSet, actualSala.getSedista());
     }
 }
-

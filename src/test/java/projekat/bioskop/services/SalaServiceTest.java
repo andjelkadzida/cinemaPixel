@@ -13,6 +13,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import projekat.bioskop.model.Sala;
@@ -22,7 +23,7 @@ import projekat.bioskop.repository.SalaRepository;
 @ExtendWith(SpringExtension.class)
 public class SalaServiceTest
 {
-    @MockBean
+    @MockitoBean
     private SalaRepository salaRepository;
 
     @Autowired
@@ -39,4 +40,3 @@ public class SalaServiceTest
         verify(this.salaRepository).findAll();
     }
 }
-

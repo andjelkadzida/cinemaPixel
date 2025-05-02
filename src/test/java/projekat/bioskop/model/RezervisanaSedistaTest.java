@@ -77,4 +77,3 @@ public class RezervisanaSedistaTest
         assertSame(sediste, actualRezervisanaSedista.getSediste());
     }
 }
-

@@ -11,8 +11,8 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import projekat.bioskop.model.Film;
 import projekat.bioskop.repository.FilmRepository;
@@ -21,7 +21,7 @@ import projekat.bioskop.repository.FilmRepository;
 @ExtendWith(SpringExtension.class)
 public class FilmServiceTest
 {
-    @MockBean
+    @MockitoBean
     private FilmRepository filmRepository;
 
     @Autowired
@@ -38,4 +38,3 @@ public class FilmServiceTest
         verify(this.filmRepository).findAll();
     }
 }
-

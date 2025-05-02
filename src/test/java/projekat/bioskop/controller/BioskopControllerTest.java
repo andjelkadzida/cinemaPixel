@@ -5,7 +5,6 @@ import static org.mockito.Mockito.anyString;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -13,21 +12,14 @@ import java.util.HashSet;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import projekat.bioskop.model.Bioskop;
-import projekat.bioskop.model.Film;
-import projekat.bioskop.model.Korisnik;
-import projekat.bioskop.model.Projekcija;
-import projekat.bioskop.model.Rezervacija;
-import projekat.bioskop.model.RezervisanaSedista;
-import projekat.bioskop.model.Sala;
-import projekat.bioskop.model.Sediste;
+import projekat.bioskop.model.*;
 import projekat.bioskop.repository.BioskopRepository;
 import projekat.bioskop.repository.ProjekcijaRepository;
 import projekat.bioskop.repository.RezervacijaRepository;
@@ -39,25 +31,25 @@ import projekat.bioskop.repository.SedisteRepository;
 @ExtendWith(SpringExtension.class)
 public class BioskopControllerTest
 {
-    @MockBean
+    @MockitoBean
     private ProjekcijaRepository projekcijaRepository;
 
-    @MockBean
+    @MockitoBean
     private RezervacijaRepository rezervacijaRepository;
 
-    @MockBean
+    @MockitoBean
     private RezervisanaSedistaRepository rezervisanaSedistaRepository;
 
-    @MockBean
+    @MockitoBean
     private SedisteRepository sedisteRepository;
 
     @Autowired
     BioskopController bioskopController;
 
-    @MockBean
+    @MockitoBean
     BioskopRepository bioskopRepository;
 
-    @MockBean
+    @MockitoBean
     SalaRepository salaRepository;
 
     @Test
@@ -98,8 +90,8 @@ public class BioskopControllerTest
         bioskop1.setNaziv("Pixel");
         bioskop1.setBioskopId(234L);
 
-        when(this.bioskopRepository.save((Bioskop) any())).thenReturn(bioskop1);
-        when(this.bioskopRepository.nadjiPoAdresiId(anyString(), anyString(), (Long) any())).thenReturn(bioskop1);
+        when(this.bioskopRepository.save(any())).thenReturn(bioskop1);
+        when(this.bioskopRepository.nadjiPoAdresiId(anyString(), anyString(), any())).thenReturn(bioskop1);
         when(this.bioskopRepository.nadjiPoAdresi(anyString(), anyString())).thenReturn(bioskop);
         MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.post("/izmenaBioskopa/{bioskop_id}", 1L);
         MockMvcBuilders.standaloneSetup(this.bioskopController)
@@ -621,6 +613,4 @@ public class BioskopControllerTest
                 .andExpect(MockMvcResultMatchers.view().name("redirect:/pregledBioskopaAdmin"))
                 .andExpect(MockMvcResultMatchers.redirectedUrl("/pregledBioskopaAdmin"));
     }
-
 }
-

@@ -37,11 +37,13 @@ public class FilmController
     RezervisanaSedistaRepository rezervisanaSedistaRepository;
 
     JavaMailSender javaMailSender;
+
     @Autowired
     public FilmController(JavaMailSender javaMailSender)
     {
         this.javaMailSender=javaMailSender;
     }
+
     @RequestMapping("/pregledFilmova")
     public String spisakFilmova(Model model)
     {
@@ -49,6 +51,7 @@ public class FilmController
         model.addAttribute("film", filmovi);
         return "pregledFilmova";
     }
+
     @RequestMapping("/pregledProjekcija/{film}")
     public String spisakProjekcija(Model model, @PathVariable("film") String izabranFilm)
     {
@@ -58,6 +61,7 @@ public class FilmController
         model.addAttribute("danas", danas);
         return "pregledProjekcija";
     }
+
     @RequestMapping(value = "/izborSedista", method = RequestMethod.POST)
     public String izaberiSedista(Model model, @RequestParam("projekcijaId") Long projekcijaId, Authentication authentication)
     {
@@ -72,6 +76,7 @@ public class FilmController
         model.addAttribute("rs", rs);
         return "izborSedista";
     }
+
     @RequestMapping(value = "/selektovanaSedista", method = RequestMethod.POST)
     public String izabranaSedista(Model model, @RequestParam("projekcijaId") Long projekcijaId, Authentication authentication, @RequestParam(name = "sediste") Set<Long>selektovanaSedista)
     {

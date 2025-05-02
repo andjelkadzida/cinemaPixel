@@ -1,6 +1,6 @@
 package projekat.bioskop.model;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.Set;
 
 @Entity
@@ -75,16 +75,13 @@ public class Bioskop
         this.sale = sale;
     }
 
+    public Bioskop() {}
+
     public Bioskop(Long bioskopId, String naziv, String adresa, String grad)
     {
         this.bioskopId = bioskopId;
         this.naziv = naziv;
         this.adresa = adresa;
         this.grad = grad;
-    }
-
-    public Bioskop()
-    {
-
     }
 }

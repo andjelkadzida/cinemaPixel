@@ -57,4 +57,3 @@ public class ProjekcijaTest
         assertSame(sala1, actualProjekcija.getSala());
     }
 }
-

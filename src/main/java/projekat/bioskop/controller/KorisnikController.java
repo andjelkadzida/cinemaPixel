@@ -1,5 +1,6 @@
 package projekat.bioskop.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -9,11 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import projekat.bioskop.model.*;
 import projekat.bioskop.repository.*;
 
-import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
-
 
 @Controller
 public class KorisnikController
@@ -51,6 +50,7 @@ public class KorisnikController
         model.addAttribute("korisnik", korisnik);
         return "korisnickiProfil";
     }
+
     @PostMapping("/korisnickiProfil/delete")
     public String brisanjeProfila(@Valid Korisnik korisnik, Authentication authentication, Model model)
     {
@@ -74,6 +74,7 @@ public class KorisnikController
         korisnikRepository.delete(korisnik);
         return "redirect:/logout";
     }
+
     @RequestMapping("/korisnickiProfil/update")
     public String updateProfilaView(Model model, Authentication authentication)
     {
@@ -81,6 +82,7 @@ public class KorisnikController
         model.addAttribute("korisnik", korisnik);
         return "izmenaKorisnickogProfila";
     }
+
     @PostMapping("/korisnickiProfil/update")
     public String updateKorisnickogProfila(@Valid Korisnik korisnik, Model model, Authentication authentication)
     {

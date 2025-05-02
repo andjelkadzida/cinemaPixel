@@ -12,21 +12,14 @@ import java.util.HashSet;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import projekat.bioskop.model.Bioskop;
-import projekat.bioskop.model.Film;
-import projekat.bioskop.model.Korisnik;
-import projekat.bioskop.model.Projekcija;
-import projekat.bioskop.model.Rezervacija;
-import projekat.bioskop.model.RezervisanaSedista;
-import projekat.bioskop.model.Sala;
-import projekat.bioskop.model.Sediste;
+import projekat.bioskop.model.*;
 import projekat.bioskop.repository.FilmRepository;
 import projekat.bioskop.repository.ProjekcijaRepository;
 import projekat.bioskop.repository.RezervacijaRepository;
@@ -39,16 +32,16 @@ public class DodavanjeFilmControllerTest
     @Autowired
     private DodavanjeFilmController dodavanjeFilmController;
 
-    @MockBean
+    @MockitoBean
     private FilmRepository filmRepository;
 
-    @MockBean
+    @MockitoBean
     private ProjekcijaRepository projekcijaRepository;
 
-    @MockBean
+    @MockitoBean
     private RezervacijaRepository rezervacijaRepository;
 
-    @MockBean
+    @MockitoBean
     private RezervisanaSedistaRepository rezervisanaSedistaRepository;
 
     @Test
@@ -282,4 +275,3 @@ public class DodavanjeFilmControllerTest
                 .andExpect(MockMvcResultMatchers.forwardedUrl("noviFilm"));
     }
 }
-

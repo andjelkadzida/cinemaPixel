@@ -1,5 +1,6 @@
 package projekat.bioskop.model;
-import javax.persistence.*;
+
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Set;
 
@@ -105,9 +106,7 @@ public class Projekcija
         this.sala = sala;
     }
 
-    public Projekcija()
-    {
-    }
+    public Projekcija() {}
 
     public Projekcija(Long projekcijaId, LocalDateTime pocetakProjekcije, LocalDateTime krajProjekcije, Sala sala, Film film)
     {
@@ -117,5 +116,4 @@ public class Projekcija
         this.sala = sala;
         this.film = film;
     }
-
 }

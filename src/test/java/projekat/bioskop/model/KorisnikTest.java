@@ -51,4 +51,3 @@ public class KorisnikTest
         assertEquals("KORISNIK", actualKorisnik.getTipKorisnika());
     }
 }
-
