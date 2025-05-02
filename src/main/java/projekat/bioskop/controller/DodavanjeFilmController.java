@@ -17,7 +17,6 @@ import projekat.bioskop.repository.ProjekcijaRepository;
 import projekat.bioskop.repository.RezervacijaRepository;
 import projekat.bioskop.repository.RezervisanaSedistaRepository;
 
-
 import java.util.List;
 import java.util.Set;
 
@@ -67,6 +66,7 @@ public class DodavanjeFilmController
         modelAndView.setViewName("noviFilm");
         return modelAndView;
     }
+
     @RequestMapping(value = "/izmenaFilmova/{film_id}", method = RequestMethod.GET)
     public String izmenaFilmovaView(Model model, @PathVariable("film_id") Long film_id)
     {

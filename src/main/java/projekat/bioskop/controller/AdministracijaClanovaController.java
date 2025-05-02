@@ -31,6 +31,7 @@ public class AdministracijaClanovaController
     private RezervisanaSedistaRepository rezervisanaSedistaRepository;
     @Autowired
     RezervacijaRepository rezervacijaRepository;
+
     @Autowired
     public AdministracijaClanovaController(KorisnikRepository korisnikRepository)
     {
