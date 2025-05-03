@@ -19,7 +19,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import projekat.bioskop.model.Korisnik;
-import projekat.bioskop.model.Rezervacija;
 import projekat.bioskop.repository.KorisnikRepository;
 
 @ContextConfiguration(classes = {KorisnikService.class, BCryptPasswordEncoder.class})
@@ -40,12 +39,12 @@ public class KorisnikServiceTest
     {
         Korisnik korisnik = new Korisnik();
         korisnik.setKorisnikId(25L);
-        Optional<Korisnik> korisnikOptional = Optional.<Korisnik>of(korisnik);
-        when(this.korisnikRepository.findById((Long) any())).thenReturn(korisnikOptional);
+        Optional<Korisnik> korisnikOptional = Optional.of(korisnik);
+        when(this.korisnikRepository.findById(any())).thenReturn(korisnikOptional);
         Optional<Korisnik> actualFindByIdResult = this.korisnikService.findById(123L);
         assertSame(korisnikOptional, actualFindByIdResult);
         assertTrue(actualFindByIdResult.isPresent());
-        verify(this.korisnikRepository).findById((Long) any());
+        verify(this.korisnikRepository).findById(any());
     }
 
     @Test
@@ -63,15 +62,15 @@ public class KorisnikServiceTest
         korisnik.setTipKorisnika("KORISNIK");
         korisnik.setSifra("KorisnickaSifra741");
         korisnik.setKorisnikId(25L);
-        korisnik.setRezervacije(new HashSet<Rezervacija>());
+        korisnik.setRezervacije(new HashSet<>());
         korisnik.setPrezime("Dzida");
         korisnik.setPoeni(12);
         korisnik.setIme("Andjelka");
-        when(this.korisnikRepository.save((Korisnik) any())).thenReturn(korisnik);
-        when(this.bCryptPasswordEncoder.encode((CharSequence) any())).thenReturn("foo");
+        when(this.korisnikRepository.save(any())).thenReturn(korisnik);
+        when(this.bCryptPasswordEncoder.encode(any())).thenReturn("foo");
         this.korisnikService.sacuvajKorisnika(korisnik);
-        verify(this.korisnikRepository).save((Korisnik) any());
-        verify(this.bCryptPasswordEncoder).encode((CharSequence) any());
+        verify(this.korisnikRepository).save(any());
+        verify(this.bCryptPasswordEncoder).encode(any());
         assertEquals("foo", korisnik.getSifra());
     }
 
@@ -84,7 +83,7 @@ public class KorisnikServiceTest
         korisnik.setTipKorisnika("KORISNIK");
         korisnik.setSifra("KorisnickaSifra741");
         korisnik.setKorisnikId(25L);
-        korisnik.setRezervacije(new HashSet<Rezervacija>());
+        korisnik.setRezervacije(new HashSet<>());
         korisnik.setPrezime("Dzida");
         korisnik.setPoeni(12);
         korisnik.setIme("Andjelka");

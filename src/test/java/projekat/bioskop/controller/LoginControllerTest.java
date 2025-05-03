@@ -1,14 +1,14 @@
 package projekat.bioskop.controller;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -16,37 +16,52 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ContextConfiguration(classes = {LoginController.class})
 @ExtendWith(SpringExtension.class)
-public class LoginControllerTest
-{
+class LoginControllerTest {
+    private static final String LOGIN_PATH = "/login";
+    private static final String LOGOUT_PATH = "/logout";
+    private static final String LOGIN_VIEW = "login";
+    private static final String LOGOUT_REDIRECT = "redirect:/login?logout";
+
     @Autowired
     private LoginController loginController;
+    
+    private MockMvc mockMvc;
 
-    @Test
-    public void testLogoutPage() throws Exception
-    {
-        MockHttpServletRequestBuilder requestBuilder = get("/logout");
-        MockMvcBuilders.standaloneSetup(this.loginController)
-                .build()
-                .perform(requestBuilder)
-                .andExpect(status().isFound())
-                .andExpect(MockMvcResultMatchers.model().size(0))
-                .andExpect(view().name("redirect:/login?logout"))
-                .andExpect(MockMvcResultMatchers.redirectedUrl("/login?logout"));
+    @BeforeEach
+    void setUp() {
+        mockMvc = MockMvcBuilders.standaloneSetup(loginController).build();
     }
 
     @Test
-    public void testLoginPage() throws Exception
-    {
-        final StandaloneMvcTestViewResolver viewResolver = new StandaloneMvcTestViewResolver();
+    void shouldRedirectToLoginPageOnLogout() throws Exception {
+        // when
+        performGet(LOGOUT_PATH)
+            // then
+            .andExpect(status().isFound())
+            .andExpect(model().size(0))
+            .andExpect(view().name(LOGOUT_REDIRECT))
+            .andExpect(redirectedUrl(LOGIN_PATH + "?logout"));
+    }
 
-        MockHttpServletRequestBuilder requestBuilder = get("/login");
-        MockMvcBuilders.standaloneSetup(this.loginController)
+    @Test
+    void shouldDisplayLoginPage() throws Exception {
+        // given
+        StandaloneMvcTestViewResolver viewResolver = new StandaloneMvcTestViewResolver();
+        mockMvc = MockMvcBuilders.standaloneSetup(loginController)
                 .setViewResolvers(viewResolver)
-                .build()
-                .perform(requestBuilder)
-                .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.model().size(0))
-                .andExpect(view().name("login"))
-                .andExpect(forwardedUrl("login"));
+                .build();
+
+        // when
+        performGet(LOGIN_PATH)
+            // then
+            .andExpect(status().isOk())
+            .andExpect(model().size(0))
+            .andExpect(view().name(LOGIN_VIEW))
+            .andExpect(forwardedUrl(LOGIN_VIEW));
+    }
+
+    private ResultActions performGet(String path) throws Exception {
+        MockHttpServletRequestBuilder request = get(path);
+        return mockMvc.perform(request);
     }
 }

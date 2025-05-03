@@ -12,27 +12,24 @@ public class SedisteTest
     @Test
     public void testSediste()
     {
-        Sediste sedistaSala = new Sediste(new Sala());
-        Sediste sedisteProjekcija = new Sediste(new HashSet<Projekcija>());
-        Sediste s = new Sediste(123L, "Standardno");
         Sediste actualSediste = new Sediste();
         actualSediste.setBrojSedista(1);
-        HashSet<Projekcija> projekcijaSet = new HashSet<Projekcija>();
+        HashSet<Projekcija> projekcijaSet = new HashSet<>();
         actualSediste.setProjekcijeSedista(projekcijaSet);
-        HashSet<RezervisanaSedista> rezervisanaSedistaSet = new HashSet<RezervisanaSedista>();
+        HashSet<RezervisanaSedista> rezervisanaSedistaSet = new HashSet<>();
         actualSediste.setRezervisanaSedista(rezervisanaSedistaSet);
         Bioskop bioskop = new Bioskop();
         bioskop.setGrad("Novi Beograd");
         bioskop.setAdresa("Arsenija Carnojevica 45");
-        bioskop.setSale(new HashSet<Sala>());
+        bioskop.setSale(new HashSet<>());
         bioskop.setNaziv("Pixel");
         bioskop.setBioskopId(234L);
         Sala sala = new Sala();
         sala.setBioskop(bioskop);
-        sala.setProjekcije(new HashSet<Projekcija>());
+        sala.setProjekcije(new HashSet<>());
         sala.setSalaId(123L);
         sala.setBrojSale(1);
-        sala.setSedista(new HashSet<Sediste>());
+        sala.setSedista(new HashSet<>());
         actualSediste.setSala(sala);
         actualSediste.setSedisteId(123L);
         actualSediste.setTipSedista("Standardno");

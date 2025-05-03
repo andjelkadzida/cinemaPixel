@@ -30,7 +30,7 @@ public class FilmServiceTest
     @Test
     public void testSviFilmovi()
     {
-        ArrayList<Film> filmList = new ArrayList<Film>();
+        ArrayList<Film> filmList = new ArrayList<>();
         when(this.filmRepository.findAll()).thenReturn(filmList);
         List<Film> actualSviFilmoviResult = this.filmService.sviFilmovi();
         assertSame(filmList, actualSviFilmoviResult);

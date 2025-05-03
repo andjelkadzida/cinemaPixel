@@ -7,12 +7,13 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Properties;
+
 import jakarta.mail.NoSuchProviderException;
 import jakarta.mail.Session;
 import jakarta.mail.Transport;
 import jakarta.mail.URLName;
-import java.time.LocalDateTime;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,6 +64,23 @@ public class FilmControllerTest {
     @MockitoBean
     private SedisteRepository sedisteRepository;
 
+    private Film testFilm;
+    private Projekcija testProjekcija;
+    private StandaloneMvcTestViewResolver viewResolver;
+
+    @BeforeEach
+    public void setup() {
+        testFilm = new Film();
+        testFilm.setNazivFilma("Test Film");
+        testFilm.setFilmId(1L);
+
+        testProjekcija = new Projekcija();
+        testProjekcija.setProjekcijaId(1L);
+        testProjekcija.setFilm(testFilm);
+
+        viewResolver = new StandaloneMvcTestViewResolver();
+    }
+
     @Test
     public void testConstructor() throws NoSuchProviderException {
         JavaMailSenderImpl javaMailSenderImpl = new JavaMailSenderImpl();
@@ -86,7 +104,7 @@ public class FilmControllerTest {
         assertNull(((JavaMailSenderImpl) javaMailSender).getHost());
         assertEquals(-1, ((JavaMailSenderImpl) javaMailSender).getPort());
         Session session = ((JavaMailSenderImpl) javaMailSender).getSession();
-        assertEquals(12, session.getProviders().length);
+        assertEquals(14, session.getProviders().length);
         assertFalse(session.getDebug());
         assertSame(javaMailProperties, session.getProperties());
         Transport transport = session.getTransport();
@@ -110,7 +128,7 @@ public class FilmControllerTest {
     @Test
     public void testIzabranaSedista() throws Exception {
         MockHttpServletRequestBuilder postResult = MockMvcRequestBuilders.post("/selektovanaSedista");
-        MockHttpServletRequestBuilder paramResult = postResult.param("projekcijaId", String.valueOf(1L));
+        MockHttpServletRequestBuilder paramResult = postResult.param("projekcijaId", String.valueOf(testProjekcija.getProjekcijaId()));
         MockHttpServletRequestBuilder requestBuilder = paramResult.param("sediste", String.valueOf(new HashSet<Long>()));
         ResultActions actualPerformResult = MockMvcBuilders.standaloneSetup(this.filmController)
                 .build()
@@ -121,7 +139,7 @@ public class FilmControllerTest {
     @Test
     public void testIzabranaSedista2() throws Exception {
         MockHttpServletRequestBuilder postResult = MockMvcRequestBuilders.post("/selektovanaSedista");
-        MockHttpServletRequestBuilder requestBuilder = postResult.param("projekcijaId", String.valueOf(1L))
+        MockHttpServletRequestBuilder requestBuilder = postResult.param("projekcijaId", String.valueOf(testProjekcija.getProjekcijaId()))
                 .param("sediste", "https://example.org/example");
         ResultActions actualPerformResult = MockMvcBuilders.standaloneSetup(this.filmController)
                 .build()
@@ -130,17 +148,25 @@ public class FilmControllerTest {
     }
 
     @Test
-    public void testSpisakFilmova() throws Exception
-    {
-        final StandaloneMvcTestViewResolver viewResolver = new StandaloneMvcTestViewResolver();
+    public void testSpisakFilmova() throws Exception {
+        ArrayList<Film> filmovi = new ArrayList<>();
+        filmovi.add(testFilm);
+        when(this.filmService.sviFilmovi()).thenReturn(filmovi);
 
-        when(this.filmService.sviFilmovi()).thenReturn(new ArrayList<>());
+        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/pregledFilmova");
+        MockMvcBuilders.standaloneSetup(this.filmController)
+                .setViewResolvers(viewResolver)
+                .build()
+                .perform(requestBuilder)
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.model().attributeExists("film"));
     }
+
     @Test
-    public void spisakFilmovaTest() throws Exception
-    {
-        when(this.filmService.sviFilmovi()).thenReturn(new ArrayList<Film>());
-        final StandaloneMvcTestViewResolver viewResolver = new StandaloneMvcTestViewResolver();
+    public void spisakFilmovaTest() throws Exception {
+        ArrayList<Film> filmovi = new ArrayList<>();
+        filmovi.add(testFilm);
+        when(this.filmService.sviFilmovi()).thenReturn(filmovi);
 
         MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/pregledFilmova");
         MockMvcBuilders.standaloneSetup(this.filmController)
@@ -155,14 +181,12 @@ public class FilmControllerTest {
     }
 
     @Test
-    public void spisakProjekcijaTest() throws Exception
-    {
-        when(this.projekcijaRepository.projekcijaPoFilmu(anyString())).thenReturn(new HashSet<Projekcija>());
-        LocalDateTime danas = LocalDateTime.now();
+    public void spisakProjekcijaTest() throws Exception {
+        HashSet<Projekcija> projekcije = new HashSet<>();
+        projekcije.add(testProjekcija);
+        when(this.projekcijaRepository.projekcijaPoFilmu(anyString())).thenReturn(projekcije);
 
-        final StandaloneMvcTestViewResolver viewResolver = new StandaloneMvcTestViewResolver();
-
-        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/pregledProjekcija/{film}", "Film");
+        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/pregledProjekcija/{film}", testFilm.getNazivFilma());
         requestBuilder.contentType("Not all who wander are lost");
         MockMvcBuilders.standaloneSetup(this.filmController)
                 .setViewResolvers(viewResolver)
