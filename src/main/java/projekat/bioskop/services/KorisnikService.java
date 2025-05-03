@@ -3,7 +3,6 @@ package projekat.bioskop.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.ModelAndView;
 import projekat.bioskop.model.Korisnik;
 import projekat.bioskop.repository.KorisnikRepository;
 
@@ -13,13 +12,10 @@ import java.util.Optional;
 @Service
 public class KorisnikService implements IKorisnikService
 {
-
     @Autowired
     KorisnikRepository korisnikRepository;
     @Autowired
     BCryptPasswordEncoder passwordEncoder;
-
-    ModelAndView modelAndView = new ModelAndView();
 
     @Override
     public Optional<Korisnik> findById(Long id)

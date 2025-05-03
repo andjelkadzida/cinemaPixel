@@ -1,86 +1,62 @@
 package projekat.bioskop.controller;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.test.web.servlet.MockMvc;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-
-import java.util.ArrayList;
-
-import static org.mockito.Mockito.when;
 
 @ContextConfiguration(classes = {IndexController.class})
 @ExtendWith(SpringExtension.class)
-public class IndexControllerTest {
+class IndexControllerTest {
+    private static final String URL_HOME = "/pocetna";
+    private static final String URL_TERMS = "/usloviKoriscenja";
+    private static final String URL_PRIVACY = "/politikaPrivatnosti";
+    private static final String URL_ABOUT = "/oNama";
+
     @Autowired
     private IndexController indexController;
+    
+    private MockMvc mockMvc;
 
-    @Test
-    public void indexTest() throws Exception
-    {
-        final StandaloneMvcTestViewResolver viewResolver = new StandaloneMvcTestViewResolver();
-
-        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/pocetna");
-        MockMvcBuilders.standaloneSetup(this.indexController)
+    @BeforeEach
+    void setUp() {
+        StandaloneMvcTestViewResolver viewResolver = new StandaloneMvcTestViewResolver();
+        mockMvc = MockMvcBuilders.standaloneSetup(indexController)
                 .setViewResolvers(viewResolver)
-                .build()
-                .perform(requestBuilder)
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.model().size(0))
-                .andExpect(MockMvcResultMatchers.view().name("pocetna"))
-                .andExpect(MockMvcResultMatchers.forwardedUrl("pocetna"));
+                .build();
     }
 
     @Test
-    public void usloviKoriscenjaTest() throws Exception
-    {
-        final StandaloneMvcTestViewResolver viewResolver = new StandaloneMvcTestViewResolver();
-
-        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/usloviKoriscenja");
-        MockMvcBuilders.standaloneSetup(this.indexController)
-                .setViewResolvers(viewResolver)
-                .build()
-                .perform(requestBuilder)
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.model().size(0))
-                .andExpect(MockMvcResultMatchers.view().name("usloviKoriscenja"))
-                .andExpect(MockMvcResultMatchers.forwardedUrl("usloviKoriscenja"));
+    void shouldDisplayHomePage() throws Exception {
+        performGetRequestAndVerifyResponse(URL_HOME, "pocetna");
     }
 
     @Test
-    public void politikaPrivatnostiTest() throws Exception
-    {
-        final StandaloneMvcTestViewResolver viewResolver = new StandaloneMvcTestViewResolver();
-
-        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/politikaPrivatnosti");
-        MockMvcBuilders.standaloneSetup(this.indexController)
-                .setViewResolvers(viewResolver)
-                .build()
-                .perform(requestBuilder)
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.model().size(0))
-                .andExpect(MockMvcResultMatchers.view().name("politikaPrivatnosti"))
-                .andExpect(MockMvcResultMatchers.forwardedUrl("politikaPrivatnosti"));
+    void shouldDisplayTermsOfService() throws Exception {
+        performGetRequestAndVerifyResponse(URL_TERMS, "usloviKoriscenja");
     }
 
     @Test
-    public void oNamaTest() throws Exception
-    {
-        final StandaloneMvcTestViewResolver viewResolver = new StandaloneMvcTestViewResolver();
+    void shouldDisplayPrivacyPolicy() throws Exception {
+        performGetRequestAndVerifyResponse(URL_PRIVACY, "politikaPrivatnosti");
+    }
 
-        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/oNama");
-        MockMvcBuilders.standaloneSetup(this.indexController)
-                .setViewResolvers(viewResolver)
-                .build()
-                .perform(requestBuilder)
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.model().size(0))
-                .andExpect(MockMvcResultMatchers.view().name("oNama"))
-                .andExpect(MockMvcResultMatchers.forwardedUrl("oNama"));
+    @Test
+    void shouldDisplayAboutPage() throws Exception {
+        performGetRequestAndVerifyResponse(URL_ABOUT, "oNama");
+    }
+
+    private void performGetRequestAndVerifyResponse(String url, String viewName) throws Exception {
+        mockMvc.perform(get(url))
+                .andExpect(status().isOk())
+                .andExpect(model().size(0))
+                .andExpect(view().name(viewName))
+                .andExpect(forwardedUrl(viewName));
     }
 }

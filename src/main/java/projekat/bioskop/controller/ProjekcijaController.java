@@ -40,6 +40,7 @@ public class ProjekcijaController
         model.addAttribute("sala", sale);
         return "novaProjekcija";
     }
+
     @RequestMapping(value = "/novaProjekcija", method = RequestMethod.POST)
     public String unosNoveProjekcije(Model model, @RequestParam("film") Long filmId, @RequestParam("sala") Long salaId, @RequestParam("pocetakProjekcije")String pocetakProjekcije)
     {
@@ -84,6 +85,7 @@ public class ProjekcijaController
         model.addAttribute("sala", sale);
         return "novaProjekcija";
     }
+
     @RequestMapping(value = "/pregledProjekcijaAdmin/{film}", method = RequestMethod.GET)
     public String pregledProjekcijaAdmin(Model model, @PathVariable("film") String izabranFilm)
     {
@@ -91,6 +93,7 @@ public class ProjekcijaController
         model.addAttribute("projekcija", projekcija);
         return "pregledProjekcijaAdmin";
     }
+
     @RequestMapping(value = "/pregledFilmovaAdmin", method = RequestMethod.GET)
     public String pregledFilmovaAdmin(Model model)
     {
@@ -98,6 +101,7 @@ public class ProjekcijaController
         model.addAttribute("film", filmovi);
         return "pregledFilmovaAdmin";
     }
+
     @RequestMapping(value = "/izmenaProjekcija/{projekcijaId}", method = RequestMethod.GET)
     public String izmenaProjekcijaView(Model model, @PathVariable("projekcijaId") Long projekcijaId)
     {
@@ -107,6 +111,7 @@ public class ProjekcijaController
         model.addAttribute("sala", sale);
         return "izmenaProjekcija";
     }
+
     @RequestMapping(value = "/izmenaProjekcija/{projekcijaId}", method = RequestMethod.POST)
     public String izmenaProjekcija(Model model, @PathVariable("projekcijaId") Long projekcijaId, @RequestParam("filmId") Long filmId, @RequestParam("pocetakProjekcije") String pocetakProjekcije, @RequestParam("sala") Long salaId)
     {
@@ -152,6 +157,7 @@ public class ProjekcijaController
         model.addAttribute("msg", msg);
         return "izmenaProjekcija";
     }
+
     @GetMapping("/otkazivanjeProjekcija/{id}")
     public String otkazivanjeProjekcija(@PathVariable("id") Long projekcijaId)
     {

@@ -30,14 +30,12 @@ public class KorisnikTest
     public void testKorisnik()
     {
         Korisnik actualKorisnik = new Korisnik();
-        Korisnik korisnik = new Korisnik(123L, "Andjelka", "Dzida", "andjelkadzida@gmail.com", "Andjelka123", "KORISNIK", 12,
-                true);
         actualKorisnik.setClanKluba(true);
         actualKorisnik.setEmail("andjelkadzida@gmail.com");
         actualKorisnik.setIme("Andjelka");
         actualKorisnik.setKorisnikId(123L);
         actualKorisnik.setPrezime("Dzida");
-        HashSet<Rezervacija> rezervacijaSet = new HashSet<Rezervacija>();
+        HashSet<Rezervacija> rezervacijaSet = new HashSet<>();
         actualKorisnik.setRezervacije(rezervacijaSet);
         actualKorisnik.setSifra("Andjelka123");
         actualKorisnik.setTipKorisnika("KORISNIK");
@@ -51,4 +49,3 @@ public class KorisnikTest
         assertEquals("KORISNIK", actualKorisnik.getTipKorisnika());
     }
 }
-

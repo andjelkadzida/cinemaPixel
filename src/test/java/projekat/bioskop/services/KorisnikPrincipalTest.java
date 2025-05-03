@@ -54,4 +54,3 @@ public class KorisnikPrincipalTest
         assertEquals("korisnik@test.com", (new KorisnikPrincipal(korisnik)).getUsername());
     }
 }
-

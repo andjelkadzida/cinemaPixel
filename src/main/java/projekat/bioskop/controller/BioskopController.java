@@ -1,5 +1,6 @@
 package projekat.bioskop.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,7 +11,6 @@ import org.springframework.web.servlet.ModelAndView;
 import projekat.bioskop.model.*;
 import projekat.bioskop.repository.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -43,6 +43,7 @@ public class BioskopController
         modelAndView.setViewName("noviBioskop");
         return modelAndView;
     }
+
     @RequestMapping(value = "/dodavanjeBioskopa", method = RequestMethod.POST)
     public ModelAndView dodavanjeNovogBioskopa(Bioskop bioskop, BindingResult bindingResult, ModelMap modelMap)
     {
@@ -75,6 +76,7 @@ public class BioskopController
         model.addAttribute("bioskop", bioskopi);
         return "pregledBioskopaAdmin";
     }
+
     @RequestMapping(value = "/izmenaBioskopa/{bioskop_id}", method = RequestMethod.GET)
     public String izmenaBioskopaView(Model model, @PathVariable("bioskop_id") Long bioskop_id)
     {
@@ -82,6 +84,7 @@ public class BioskopController
         model.addAttribute("bioskop", bioskop);
         return "izmenaBioskopa";
     }
+
     @RequestMapping(value = "/izmenaBioskopa/{bioskop_id}", method = RequestMethod.POST)
     public String izmenaBioskopa(Model model, @PathVariable("bioskop_id") Long bioskop_id, @Valid Bioskop bioskop)
     {
@@ -105,6 +108,7 @@ public class BioskopController
             return "redirect:/pregledBioskopaAdmin";
         }
     }
+
     @GetMapping(value = "/brisanjeBioskopa/{bioskop_id}")
     public String brisanjeBioskopa(@PathVariable("bioskop_id") Long bioskopId)
     {
@@ -152,6 +156,7 @@ public class BioskopController
         bioskopRepository.delete(bioskop);
         return "redirect:/pregledBioskopaAdmin";
     }
+
     @RequestMapping(value = "/pregledBioskopa", method = RequestMethod.GET)
     public String pregledBioskopa(Model model)
     {

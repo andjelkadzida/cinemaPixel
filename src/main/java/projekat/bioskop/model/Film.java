@@ -1,5 +1,6 @@
 package projekat.bioskop.model;
-import javax.persistence.*;
+
+import jakarta.persistence.*;
 import java.util.Set;
 
 @Entity
@@ -113,6 +114,8 @@ public class Film
         this.Trailer = Trailer;
     }
 
+    public Film() {}
+
     public Film(Long filmId, String nazivFilma, String zanr, String tehnologija, int trajanje, String opis, String Trailer)
     {
         this.filmId = filmId;
@@ -122,9 +125,5 @@ public class Film
         this.trajanje = trajanje;
         this.opis = opis;
         this.Trailer = Trailer;
-    }
-
-    public Film()
-    {
     }
 }

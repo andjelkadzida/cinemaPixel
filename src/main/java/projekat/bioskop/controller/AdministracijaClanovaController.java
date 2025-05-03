@@ -1,5 +1,6 @@
 package projekat.bioskop.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +15,6 @@ import projekat.bioskop.repository.RezervacijaRepository;
 import projekat.bioskop.repository.RezervisanaSedistaRepository;
 import projekat.bioskop.services.KorisnikService;
 
-import javax.validation.Valid;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -31,6 +31,7 @@ public class AdministracijaClanovaController
     private RezervisanaSedistaRepository rezervisanaSedistaRepository;
     @Autowired
     RezervacijaRepository rezervacijaRepository;
+
     @Autowired
     public AdministracijaClanovaController(KorisnikRepository korisnikRepository)
     {

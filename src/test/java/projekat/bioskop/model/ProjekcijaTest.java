@@ -13,14 +13,13 @@ public class ProjekcijaTest
     @Test
     public void testConstructor2()
     {
-        Projekcija projekcija = new Projekcija();
-        LocalDateTime pocetakProjekcije = LocalDateTime.of(2021, 8, 15, 21, 00);
+        LocalDateTime pocetakProjekcije = LocalDateTime.of(2021, 8, 15, 21, 0);
         LocalDateTime krajProjekcije = LocalDateTime.of(2021, 8, 15, 22, 30);
         Sala sala = new Sala();
         Projekcija actualProjekcija = new Projekcija(123L, pocetakProjekcije, krajProjekcije, sala, new Film());
         Film film = new Film();
         film.setOpis("https://www.imdb.com/title/tt10039344/?ref_=wl_li_tt");
-        film.setProjekcije(new HashSet<Projekcija>());
+        film.setProjekcije(new HashSet<>());
         film.setZanr("Horor, Triler");
         film.setNazivFilma("Countdown");
         film.setTrailer("https://www.youtube.com/embed/TZsgNH17_X4");
@@ -31,22 +30,22 @@ public class ProjekcijaTest
         actualProjekcija.setKrajProjekcije(pocetakProjekcije);
         actualProjekcija.setPocetakProjekcije(krajProjekcije);
         actualProjekcija.setProjekcijaId(123L);
-        HashSet<Sediste> sedisteSet = new HashSet<Sediste>();
+        HashSet<Sediste> sedisteSet = new HashSet<>();
         actualProjekcija.setRasporedSedista(sedisteSet);
-        HashSet<Rezervacija> rezervacijaSet = new HashSet<Rezervacija>();
+        HashSet<Rezervacija> rezervacijaSet = new HashSet<>();
         actualProjekcija.setRezervacije(rezervacijaSet);
         Bioskop bioskop = new Bioskop();
         bioskop.setGrad("Novi Beograd");
         bioskop.setAdresa("Arsenija Carnojevica 45");
-        bioskop.setSale(new HashSet<Sala>());
+        bioskop.setSale(new HashSet<>());
         bioskop.setNaziv("Pixel");
         bioskop.setBioskopId(246L);
         Sala sala1 = new Sala();
         sala1.setBioskop(bioskop);
-        sala1.setProjekcije(new HashSet<Projekcija>());
+        sala1.setProjekcije(new HashSet<>());
         sala1.setSalaId(2L);
         sala1.setBrojSale(3);
-        sala1.setSedista(new HashSet<Sediste>());
+        sala1.setSedista(new HashSet<>());
         actualProjekcija.setSala(sala1);
         assertSame(film, actualProjekcija.getFilm());
         assertSame(pocetakProjekcije, actualProjekcija.getKrajProjekcije());
@@ -57,4 +56,3 @@ public class ProjekcijaTest
         assertSame(sala1, actualProjekcija.getSala());
     }
 }
-

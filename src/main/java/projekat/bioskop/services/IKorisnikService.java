@@ -8,7 +8,7 @@ public interface IKorisnikService
 {
     Optional<Korisnik> findById(Long id);
 
-    public void sacuvajKorisnika(Korisnik korisnik);
+    void sacuvajKorisnika(Korisnik korisnik);
 
-    public boolean postojiKorisnik(Korisnik korisnik);
+    boolean postojiKorisnik(Korisnik korisnik);
 }

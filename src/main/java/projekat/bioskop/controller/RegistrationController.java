@@ -1,5 +1,6 @@
 package projekat.bioskop.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -9,8 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import projekat.bioskop.model.Korisnik;
 import projekat.bioskop.services.KorisnikService;
-
-import javax.validation.Valid;
 
 @Controller
 public class RegistrationController
@@ -51,5 +50,4 @@ public class RegistrationController
         modelAndView.setViewName("registracija");
         return modelAndView;
     }
-
 }

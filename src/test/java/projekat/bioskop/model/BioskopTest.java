@@ -12,13 +12,12 @@ class BioskopTest
     @Test
     public void testBioskop()
     {
-        Bioskop bioskop = new Bioskop();
         Bioskop actualBioskop = new Bioskop(234L, "Pixel", "Arsenija Carnojevica 45", "Novi Beograd");
         actualBioskop.setAdresa("Arsenija Carnojevica 45");
         actualBioskop.setBioskopId(234L);
         actualBioskop.setGrad("Novi Beograd");
         actualBioskop.setNaziv("Pixel");
-        HashSet<Sala> salaSet = new HashSet<Sala>();
+        HashSet<Sala> salaSet = new HashSet<>();
         actualBioskop.setSale(salaSet);
         assertEquals("Arsenija Carnojevica 45", actualBioskop.getAdresa());
         assertEquals(234L, actualBioskop.getBioskopId().longValue());

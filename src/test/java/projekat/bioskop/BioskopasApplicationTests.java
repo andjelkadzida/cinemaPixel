@@ -6,10 +6,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class BioskopasApplicationTests
 {
-
     @Test
-    void contextLoads()
-    {
-    }
-
+    void contextLoads() {}
 }

@@ -5,7 +5,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import projekat.bioskop.model.Film;
 
-
 public interface FilmRepository extends JpaRepository<Film, Long>
 {
     @Query(value = "select * from Film f where f.naziv_filma=:naziv", nativeQuery = true)

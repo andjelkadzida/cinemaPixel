@@ -1,5 +1,6 @@
 package projekat.bioskop.controller;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.core.Authentication;
@@ -12,7 +13,6 @@ import projekat.bioskop.repository.ProjekcijaRepository;
 import projekat.bioskop.repository.RezervacijaRepository;
 import projekat.bioskop.repository.RezervisanaSedistaRepository;
 
-import javax.transaction.Transactional;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -96,6 +96,7 @@ public class RezervacijaController
             }
         }
     }
+
     //Automatsko brisanje svih rezervacija i rezervisanih sedista za projekcije koje su zavrsene, metoda se okida jednom dnevno
     @Scheduled(cron = "0 0 12 01 * ?")
     @Transactional
@@ -131,6 +132,7 @@ public class RezervacijaController
             }
         }
     }
+
     @RequestMapping(value = "/mojeRezervacije/delete/{rezervacija_id}", method = RequestMethod.GET)
     public String otkazivanjeRezervacije(@PathVariable("rezervacija_id") Long rezervacija_id, Authentication auth)
     {
@@ -189,6 +191,7 @@ public class RezervacijaController
         }
         return "redirect:/mojeRezervacije";
     }
+
     @GetMapping(value = "/mojeRezervacije/potvrdi/{rezervacija_id}")
     public String potvrdaRezervacije(Model model, @PathVariable("rezervacija_id") Long rezervacija_id)
     {
@@ -197,6 +200,7 @@ public class RezervacijaController
         rezervacijaRepository.save(rezervacija);
         return "redirect:/mojeRezervacije";
     }
+
     @RequestMapping(value = "/mojeRezervacije/poeni/{sediste_id}")
     public String iskoristiPoene(Model model, @PathVariable("sediste_id") long sediste_id, Authentication authentication)
     {
@@ -221,5 +225,4 @@ public class RezervacijaController
         }
         return "redirect:/mojeRezervacije";
     }
-
 }
